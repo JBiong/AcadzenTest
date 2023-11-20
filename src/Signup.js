@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Grid, TextField, Toolbar, Typography } from "@mui/material";
 import Login from "./Login"; // Import Login component
 import "./login.css"; // Import your styles file
+import { Navigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -42,7 +43,7 @@ const Signup = () => {
 
   // Render Login component if isAccountCreated is true
   if (isAccountCreated) {
-    return <Login />;
+    return <Navigate to="/login" />;
   }
 
   return (

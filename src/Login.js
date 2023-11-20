@@ -75,7 +75,7 @@ const Login = () => {
 
   // Render Login component if isAccountCreated is true
   if (isAccountCreated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/login" />;
   }
 
   const handleSignUpClick = () => {

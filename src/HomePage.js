@@ -36,10 +36,7 @@ export default function HomePage() {
         <Router>
             <div className={styles.homebg}>
                 <Routes>
-                    <Route
-                        path="/dashboard"
-                        element={user ? <Dashboard /> : <Navigate to="/" />}
-                    />
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />
                     <Route path="/signup" element={<Signup handleToggle={() => setShowLogin(false)} />} />
                     <Route
@@ -80,26 +77,26 @@ export default function HomePage() {
                                     </AppBar>
                                 )}
                                 {!hideAppBar && ( 
-                        <div className={styles.contentContainer}>
-                            <div>
-                                <Typography variant="h3" component="div"  style={{fontWeight: 'bold', color:'#FFFFFF', width:'800px', fontSize:'75px'}}>
-                                    Elevating College Life for Holistic Success
-                                </Typography>
-                            </div>
-                            <div style={{width:'475px', color:'#787360'}}>
-                                <Typography variant="h6" component="div" style={{fontSize: '25px', fontWeight:'bold'}}>
-                                    Transforming Academic Journey with Integrated Flashcards, Dreamboard, and Mental Health Support 
-                                </Typography>
-                            </div>
-                        </div>
-                    )}
-                    {showHometoabout && (
-                        <div style={{marginTop:'350px', textAlign:'center', marginLeft:'475px'}}>
-                            <h1 style={{fontSize:'60px', width:'1100px'}}>Excel in your courses using our latest set of study resources.</h1>
-                        <div className={styles.hometoabout}></div>
-                            
-                        </div>
-                    )}
+                                    <div className={styles.contentContainer}>
+                                        <div>
+                                            <Typography variant="h3" component="div"  style={{fontWeight: 'bold', color:'#FFFFFF', width:'800px', fontSize:'75px'}}>
+                                                Elevating College Life for Holistic Success
+                                            </Typography>
+                                        </div>
+                                        <div style={{width:'475px', color:'#787360'}}>
+                                            <Typography variant="h6" component="div" style={{fontSize: '25px', fontWeight:'bold'}}>
+                                                Transforming Academic Journey with Integrated Flashcards, Dreamboard, and Mental Health Support 
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                )}
+                                {showHometoabout && (
+                                    <div style={{marginTop:'350px', textAlign:'center', marginLeft:'475px'}}>
+                                        <h1 style={{fontSize:'60px', width:'1100px'}}>Excel in your courses using our latest set of study resources.</h1>
+                                    <div className={styles.hometoabout}></div>
+                                        
+                                    </div>
+                                )}
                             </Box>
                         }
                     />
