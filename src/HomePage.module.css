@@ -1,0 +1,57 @@
+/* HomePage.module.css */
+
+.homebg {
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: center; */
+    height: 100vh; 
+    width: auto;
+    background-color: #F2D064;
+    /* background-image: url("/public/okk.png"); */
+    background-image: url('/public/amen.png');
+}
+.appBar {
+    background-color: #FFFFFF;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    /* background-color: #FFFDD6; */
+    height: 50vh;
+    width: 750px;
+    border-radius: 20px;
+    margin-left: 55%;
+    margin-top: 10%;
+}
+
+.homeacadzen {
+    flex-grow: 1;
+    font-weight: bold;
+    color: #8C7111;
+    font-size: 55px;
+}
+
+.hometoabout {
+    background-color: #FFEAA0;
+    margin-top: 1500px;
+    margin-left: 105px;
+    height: 575px;
+    width: 1700px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 20px;
+}
+
+.hideHometoabout {
+    display: none;
+}
+/* Add other styles specific to HomePage.js below */
