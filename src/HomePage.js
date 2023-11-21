@@ -91,10 +91,41 @@ export default function HomePage() {
                                     </div>
                                 )}
                                 {showHometoabout && (
-                                    <div style={{marginTop:'350px', textAlign:'center', marginLeft:'475px'}}>
-                                        <h1 style={{fontSize:'60px', width:'1100px'}}>Excel in your courses using our latest set of study resources.</h1>
-                                    <div className={styles.hometoabout}></div>
-                                        
+                                    <div className={styles.homeaboutbg}>
+                                        <h1 style={{fontSize:'60px', width:'1100px', marginLeft:'18%'}}>Excel in your courses using our latest set of study resources.</h1>
+                                    
+                                        <div className={styles.hometoabout}></div>
+                                            <div style={{ marginTop:'900px', height:'80vh', display:'flex', flexDirection:'row'}}>
+                                                    <img
+                                                        src="uploadimg.png"
+                                                        alt="upl"
+                                                        style={{
+                                                            width: '800px', height:'600px'
+                                                        }}
+                                                    />
+                                                <div style={{marginLeft:'8%',textAlign:'left', height:'600px'}}>
+                                                    <div>
+                                                    <Typography variant="h3" component="div"  style={{fontWeight: 'bold', color:'#000000', width:'800px', fontSize:'60px'}}>
+                                                        Preapare yourself for the day of the test.
+                                                    </Typography>
+                                                </div>
+                                                <div style={{width:'475px', color:'#787360'}}>
+                                                    <Typography variant="h6" component="div" style={{fontSize: '25px', fontWeight:'bold'}}>
+                                                        Transform your PowerPoint slides into flashcards for accelerated outcomes.
+                                                    </Typography>
+                                                </div>
+                                                <div>
+                                                <Link to="/signup" style={{ textDecoration: "none" }}>
+                                                    <Button fullWidth
+                                                            type="submit"
+                                                            variant="contained"
+                                                            style={{ width: "30%", borderRadius: "10px", backgroundColor: "#FAC712", color: "black", fontWeight: "bold", marginTop:'30%', fontSize:'100%' }}
+                                                        >Get Started
+                                                    </Button>
+                                                </Link>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </Box>

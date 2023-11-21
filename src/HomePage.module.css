@@ -6,9 +6,11 @@
     /* align-items: center; */
     height: 100vh; 
     width: auto;
-    background-color: #F2D064;
+    /* background-color: #F2D064; */
     /* background-image: url("/public/okk.png"); */
     background-image: url('/public/amen.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .appBar {
     background-color: #FFFFFF;
@@ -35,7 +37,8 @@
 
 .hometoabout {
     background-color: #FFEAA0;
-    margin-top: 1500px;
+    background-size: cover;
+    margin-top: 1450px;
     margin-left: 105px;
     height: 575px;
     width: 1700px;
@@ -49,6 +52,15 @@
     justify-content: center;
     align-items: flex-start;
     border-radius: 20px;
+}
+
+.homeaboutbg{
+    background-image: url('/public/bubbles.png');
+    margin-top: 400px;
+    margin-left: 6%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .hideHometoabout {
