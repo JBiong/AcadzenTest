@@ -32,37 +32,25 @@ body::before {
     height: 500vh; /* Set height to 100% of the viewport height */
   }
   
-  .upload-document-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 20px; /* Adjust the gap between the columns */
-    padding: 20px;
-  }
-  
-  .left-panel{
+  .center-panel{
     background: white;
     border-radius: 15px;
     padding: 20px;
-    width: 757px;
+    width: 60%;;
     height: 478px;
-    margin-left: 50px;
-    margin-top: 90px;
+    margin: 50px auto;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
-    border: 3px dashed #A58585;
     text-align: center;
   }
 
-  .right-panel{
+  .inner-panel{
     background: #FFD234;
     border-radius: 15px;
-    padding: 20px;
-    width: 700px;
-    height: 622px;
-    margin-left: 30px;
-    margin-right: 20px;
-    margin-top: 90px;
+    width: 98%;;
+    height: 400px;
+    margin: 68px auto;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
-    border: 6px dashed #A58585,
+    text-align: center;
   }
   
   /* Example of a media query for small screens */

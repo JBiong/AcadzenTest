@@ -14,8 +14,8 @@ function UploadDocument() {
                 </Typography>
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%', padding: '10px', marginLeft: '100px'}}>
                     <div style={{ background: 'white', borderRadius: '15px', textAlign: 'center', height: '55px', width: '1101px', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}>
-                        <Typography variant="h4" style={{ fontFamily: "Roboto Condensed", fontSize: '35px',color: '#332D2D', textAlign: 'center' }}
-                        >Document to Flashcard Converter
+                        <Typography variant="h4" style={{ fontFamily: "Roboto Condensed", fontSize: '35px',color: '#332D2D', textAlign: 'center', lineHeight: '55px' }}
+                        >Learning Session
                         </Typography>
                     </div>
                 </div>
@@ -29,36 +29,15 @@ function UploadDocument() {
             </Toolbar>
         </AppBar>
 
-        <div className="upload-document-content">
-        {/* Left Panel for Browsing/Uploading Files */}
-        <div className="left-panel">
-            <img src= "/document icon.png" alt="Document Icon" style={{width: 100, marginTop: '120px', marginBottom: '30px'}}/>
-            <Typography variant="h4" style={{ fontFamily: 'Roboto Condensed', fontSize: '20px', color: 'black', textAlign: 'center', fontWeight: 'bold'}}>
-                Supported document types: PDF, DOCX, TXT, PPTX
-            </Typography>
-            <div style={{marginTop: '60px'}}>
-            <Button style={{background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px'}}> 
-                <Typography style={{fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none'}}>
-                     Browse 
-                </Typography> 
-            </Button>
+        <div className="center-panel">
+            <div className="inner-panel">
+            
             </div>
-            <Button style={{background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px', marginTop: '170px'}}> 
-                <Typography style={{fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none'}}>
-                     Upload Document 
-                </Typography> 
-            </Button>
+    
         </div>
 
         {/* Right Panel for Displaying Uploaded Files */}
-        <div className="right-panel">
-        <Typography variant="h4" style={{ fontFamily: 'Roboto Condensed', fontSize: '30px', color: '#332D2D', textAlign: 'left', margin: '10px' }}>
-            Uploaded Documents
-        </Typography>
-        {/* Add your file display components here */}
-        </div>
-        </div>
-
+        
     </>
     );
 }
