@@ -10,6 +10,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import styles from './HomePage.module.css';
+import UploadDocument from './LearningSession';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -37,6 +38,7 @@ export default function HomePage() {
             <div className={styles.homebg}>
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path='/learningsession' element={<UploadDocument />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />
                     <Route path="/signup" element={<Signup handleToggle={() => setShowLogin(false)} />} />
                     <Route

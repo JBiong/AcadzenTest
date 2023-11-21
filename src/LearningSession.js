@@ -6,7 +6,8 @@ import HomeIcon from "@mui/icons-material/Home";
 function UploadDocument() {
     return (
     <>
-        <AppBar position="static" style={{background: 'none', boxShadow: 'none', padding: '10px', marginTop: '20px'}}>
+    <div className="welcome-back-page">
+        <AppBar style={{background: 'none', boxShadow: 'none', padding: '10px', marginTop: '10px'}}>
             <Toolbar>
                 <img src= "/logo.png" alt="App Logo" style={{width: 100, marginLeft: '50px'}}/>
                 <Typography variant="h3" style={{fontFamily: 'Poppin, sans-serif', fontWeight: '600', fontSize: '40px',color: '#B18A00'}}
@@ -58,7 +59,7 @@ function UploadDocument() {
         {/* Add your file display components here */}
         </div>
         </div>
-
+        </div>
     </>
     );
 }
