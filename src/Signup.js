@@ -66,7 +66,7 @@ const Signup = () => {
           </p>
         </div>
         <div style={{ marginLeft: "30px" }}>
-          <img src="welimg.png" style={{ width: "500px" }} alt="Welcome Image" />
+          <img src="studying.png" style={{ width: "500px" }} alt="Welcome Image" />
         </div>
       </div>
       <div className="login-form-container">

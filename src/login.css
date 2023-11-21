@@ -6,7 +6,7 @@
     width: auto;
     background-color: #F2D064;
     /* background-image: url("/public/okk.png"); */
-    background-image: url('/public/amen.png');
+    background-image: url('/public/homepagebackground.png');
 }
 
 .backg {
@@ -54,7 +54,7 @@
 }
 
 .dashboard {
-    background-image: url('/public/welbg.png');
+    background-image: url('/public/crystalbackground.png');
     background-size: cover;
     height: 100vh;
     width: 1000vh;
@@ -138,7 +138,7 @@
 
 
 .welcome-back-page {
-    background-image: url('/public/welbg.png');
+    background-image: url('/public/crystalbackground.png');
     background-color: #FFFFFF;
     background-size: cover;
     height: 100vh;

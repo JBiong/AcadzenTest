@@ -8,7 +8,7 @@
     width: auto;
     /* background-color: #F2D064; */
     /* background-image: url("/public/okk.png"); */
-    background-image: url('/public/amen.png');
+    background-image: url('/public/homepagebackground.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -56,8 +56,8 @@
 
 .homeaboutbg{
     background-image: url('/public/bubbles.png');
-    margin-top: 400px;
-    margin-left: 6%;
+    margin-top: 350px;
+    /* margin-left: 6%; */
     text-align: center;
     background-repeat: no-repeat;
     background-size: cover;
