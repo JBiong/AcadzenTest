@@ -129,7 +129,7 @@ export default function HomePage() {
                                             </div>
                                         </div>
                                         <div style={{backgroundColor:'#FFFFFF'}}>
-                                            <div className='Aboutcontents' style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'250px' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'250px' }}>
                                                 {/* Column 1 */}
                                                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                                                     <h1>About</h1>
@@ -153,7 +153,6 @@ export default function HomePage() {
                                                     <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Guidelines</Button>
                                                     <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Honor Code</Button>
                                                 </div>
-                                                
                                             </div>
                                             <hr style={{ border: 'none', borderBottom: '1px solid grey', margin: '50px', marginTop:'25px' }} />
                                             <div style={{backgroundColor:'#FFFFFF', marginTop:'50px', height:'350px'}}>
@@ -178,6 +177,36 @@ export default function HomePage() {
                                                                 width: '60px', margin:'20px'
                                                             }}
                                                         />
+                                                        <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'75px', width:'1000px', marginLeft:'450px' }}>
+                                                            {/* Column 1 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Privacy Policy</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 2 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Cookie Policy</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 3 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Legal Notice</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 4 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Accessibility Policy</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 4 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Cookie Settings</p>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <p style={{fontWeight:'bold'}}>Philippine - English</p>
+                                                            <p>2023 Acadzen Inc.</p>
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
