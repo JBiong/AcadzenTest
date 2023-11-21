@@ -1,0 +1,71 @@
+body {
+    margin-bottom: auto 40px; 
+    padding: 0; 
+    background-image: url('/public/welbg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}  
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3); /* Adjust the last value to change the opacity */
+    z-index: -1; /* Ensure the pseudo-element is behind the content */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Set your desired background color */
+    padding: 10px;
+  }
+  .upload-document-container {
+    display: flex;
+    flex-direction: column;
+    height: 500vh; /* Set height to 100% of the viewport height */
+  }
+  
+  .upload-document-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px; /* Adjust the gap between the columns */
+    padding: 20px;
+  }
+  
+  .left-panel{
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 757px;
+    height: 478px;
+    margin-left: 50px;
+    margin-top: 90px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    border: 3px dashed #A58585;
+    text-align: center;
+  }
+
+  .right-panel{
+    background: #FFD234;
+    border-radius: 15px;
+    padding: 20px;
+    width: 700px;
+    height: 622px;
+    margin-left: 30px;
+    margin-right: 20px;
+    margin-top: 90px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    border: 6px dashed #A58585,
+  }
+  
+  /* Example of a media query for small screens */
+@media (max-width: 768px) {
+    /* Your styles for small screens here */
+  }

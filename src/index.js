@@ -6,13 +6,15 @@ import reportWebVitals from './reportWebVitals';
 // import Login from './Login';
 import HomePage from './HomePage';
 import Dashboard from './Dashboard';
+import UploadDocument from './UploadDocument';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <HomePage/>
+    {/* <HomePage/> */}
     {/* <Dashboard/> */}
+    <UploadDocument/>
   </React.StrictMode>
 );
 
