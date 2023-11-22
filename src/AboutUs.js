@@ -5,6 +5,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LanguageIcon from '@mui/icons-material/Language';
+import { Link } from "react-router-dom";
 
 function AboutUs() {
 
@@ -41,9 +42,9 @@ function AboutUs() {
                 </Typography>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Button style={{ color: '#8C7111', fontWeight: 'bold' }}>Sign up</Button>
+                <Link to="/signup" style={{ textDecoration: 'none' }}><Button style={{ color: '#8C7111', fontWeight: 'bold' }}>Sign up</Button></Link>
                 <Box sx={{ marginX: '8px', color: '#8C7111' }}>|</Box>
-                <Button style={{ color: '#8C7111', fontWeight: 'bold' }}>Login</Button>
+                <Link to="/login" style={{ textDecoration: 'none' }}><Button style={{ color: '#8C7111', fontWeight: 'bold' }}>Login</Button></Link>
                 </div>
             </Toolbar>
         </AppBar>

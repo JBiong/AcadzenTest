@@ -52,7 +52,7 @@ export default function HomePage() {
                         element={
                             <Box sx={{ flexGrow: 1 }}>
                                 {!hideAppBar && (
-                                    <AppBar position="static" style={{ backgroundColor: '#FFFFFF' }}>
+                                    <AppBar position="fixed" style={{ backgroundColor: '#FFFFFF' }}>
                                         <Toolbar>
                                             <IconButton
                                                 size="large"

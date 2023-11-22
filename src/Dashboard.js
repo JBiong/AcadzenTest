@@ -24,7 +24,7 @@ const Dashboard = () => {
   useEffect(() => {
     // Check if the current location is /dashboard and set the Overview button state accordingly
     setOverviewClicked(location.pathname === "/dashboard");
-    setDocumentClicked(location.pathname === "/documenttoflashcards");
+    setDocumentClicked(location.pathname === "/uploaddocument");
     setDreamboardClicked(location.pathname === "/dreamboard");
     setMentalHealthClicked(location.pathname === "/mentalhealth");
     setPricingClicked(location.pathname === "/pricing");
@@ -134,6 +134,7 @@ const Dashboard = () => {
             onClick={() => handleButtonClick('overview')}
           ><GradingIcon style={{marginRight:'10px'}}/> Overview</Button>
         </Link>
+        <Link to="/uploaddocument" style={{ textDecoration: 'none' }}>
           <Button
           color="inherit"
           type="submit"
@@ -150,6 +151,7 @@ const Dashboard = () => {
           }}
           onClick={() => handleButtonClick('document')}
         ><PictureAsPdfIcon style={{marginRight:'10px'}}/> Document to Flashcards</Button>
+        </Link>
           <Button
           color="inherit"
           type="submit"
