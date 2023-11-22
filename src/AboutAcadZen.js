@@ -50,13 +50,13 @@ function AboutAcadZen() {
                     <Typography sx={{fontFamily: 'Nunito Sans, sans-serif', fontSize: '32px', fontWeight: 'bold', textAlign: 'center', marginTop: '100px'}}>
                         About AcadZen
                     </Typography>
-                    <Typography sx={{fontFamily: 'Inter', fontSize: '30px', textAlign: 'center', marginTop: '40px'}}>
-                    AcadZen is a revolutionary web application designed to empower college students to excel acadically and personally. <br/>
-                    We understand the challenges of college life, and we’re here to help you navigate them with ease and efficiency.
+                    <Typography sx={{fontFamily: 'Inter', fontSize: '28px', textAlign: 'center', marginTop: '40px'}}>
+                    AcadZen is a revolutionary web application designed to empower college students to excel acadically and personally. 
+                    We understand the challenges of college life, and we’re here to help you navigate them <br/> with ease and efficiency.
                     </Typography>           
                 </div>
         <div style={{marginTop: '60px'}}>
-            <Typography sx={{fontFamily: 'Nunito Sans, sans-serif', fontSize: '28px', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px'}}>
+            <Typography sx={{fontFamily: 'Nunito Sans, sans-serif', fontSize: '32px', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px'}}>
                 Our Features
             </Typography>
             <Box display="flex" justifyContent="center">
@@ -94,7 +94,7 @@ function AboutAcadZen() {
                     boxShadow= '0px 10px 10px 0px rgba(0, 0, 0, 0.25)'
                 >
                     <Typography variant="body1" sx={{fontFamily: 'Nunito Sans, sans-serif', fontSize: '23px', textAlign: 'left', margin: '0px 15px 20px 20px'}}> 
-                    <strong>Dreamboard</strong> <br/> <br/>
+                    <strong>Dreamboard</strong> <br/> 
                      Visualize your goals and track your progress with our interactive dreamboard. It’s a powerful tool for motivation and personal growth.
                     </Typography>
                 </Box>
@@ -120,10 +120,10 @@ function AboutAcadZen() {
         </div>
 
             <div style={{margin: '70px 60px 0 60px'}}>
-                <Typography sx={{fontFamily: 'Nunito Sans, sans-serif', fontSize: '28px', fontWeight: 'bold', textAlign: 'center'}}>
+                <Typography sx={{fontFamily: 'Nunito Sans, sans-serif', fontSize: '32px', fontWeight: 'bold', textAlign: 'center'}}>
                     Our Vision
                 </Typography>
-                <Typography sx={{fontFamily: 'Inter', fontSize: '30px', textAlign: 'center', marginTop: '30px'}}> 
+                <Typography sx={{fontFamily: 'Inter', fontSize: '28px', textAlign: 'center', marginTop: '30px'}}> 
                 At AcadZen, we believe in holistic growth and well-being. We aim to provide a user-friendly hub that fosters academic excellence, personal development, and mental health.
                 We’re not just another educational platform; <br/>we’re a community committed to helping you thrive during your college journey.
                 </Typography>   

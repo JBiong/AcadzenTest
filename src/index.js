@@ -8,6 +8,7 @@ import HomePage from './HomePage';
 import Dashboard from './Dashboard';
 import UploadDocument from './UploadDocument';
 import AboutAcadZen from './AboutAcadZen';
+import AboutUs from './AboutUs';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,7 +16,9 @@ root.render(
     {/* <App /> */}
     {/* <HomePage/> */}
     {/* <Dashboard/> */}
-    <UploadDocument/>
+    {/* <UploadDocument/> */}
+    {/* <AboutAcadZen/> */}
+    <AboutUs/>
   </React.StrictMode>
 );
 
