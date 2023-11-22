@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import HomePage from './HomePage';
 import Dashboard from './Dashboard';
 import UploadDocument from './UploadDocument';
+import LearningSession from './LearningSession';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
     <HomePage/>
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
+    {/* <LearningSession/> */}
   </React.StrictMode>
 );
 
