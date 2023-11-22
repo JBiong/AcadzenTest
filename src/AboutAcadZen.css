@@ -1,0 +1,50 @@
+.AboutBg { 
+    display:grid;
+    background-image: url('/public/About bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: auto;
+    width: auto;
+    padding-bottom: 50px;
+}  
+
+.AppInfo{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: auto;
+    padding: 10px; /* Add padding for better spacing */
+    margin-left: 200px;
+  }
+  
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
+    padding: 20px;
+    text-align: left;
+    font-family: 'Inter';
+  }
+  .grid-item h2 {
+      font-size: 30px;
+      font-weight: bold;
+  }
+
+  .grid-item p {
+    font-size: 25px;
+    cursor: pointer;
+  }
+  
+  .grid-item p:hover {
+    color: #9b7f11; /* Change the background color as desired */
+  }
+
+  .footer {
+    margin-top: 20px; /* Adjust margin-top as needed */
+    text-align: center; /* Center-align the content within the footer */ 
+    padding: 10px; /* Add padding for better spacing */
+
+  }
+
+  
+  
+
+  
