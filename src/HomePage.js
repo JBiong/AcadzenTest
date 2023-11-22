@@ -10,7 +10,8 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import styles from './HomePage.module.css';
-import UploadDocument from './LearningSession';
+import LearningSession from './LearningSession';
+import UploadDocument from './UploadDocument';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -38,7 +39,8 @@ export default function HomePage() {
             <div className={styles.homebg}>
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path='/learningsession' element={<UploadDocument />} />
+                    <Route path='/learningsession' element={<LearningSession />} />
+                    <Route path='/uploaddocument' element={<UploadDocument />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />
                     <Route path="/signup" element={<Signup handleToggle={() => setShowLogin(false)} />} />
                     <Route
@@ -156,6 +158,7 @@ export default function HomePage() {
                                             </div>
                                             <hr style={{ border: 'none', borderBottom: '1px solid grey', margin: '50px', marginTop:'25px' }} />
                                             <div style={{backgroundColor:'#FFFFFF', marginTop:'50px', height:'350px'}}>
+                                                    <IconButton>
                                                         <img
                                                             src="insta.png"
                                                             alt="insta"
@@ -163,6 +166,8 @@ export default function HomePage() {
                                                                 width: '60px', margin:'20px'
                                                             }}
                                                         />
+                                                    </IconButton>
+                                                    <IconButton>
                                                         <img
                                                             src="facebook.png"
                                                             alt="fb"
@@ -170,6 +175,8 @@ export default function HomePage() {
                                                                 width: '60px', margin:'20px'
                                                             }}
                                                         />
+                                                    </IconButton>
+                                                    <IconButton>
                                                         <img
                                                             src="twitter.png"
                                                             alt="X"
@@ -177,6 +184,7 @@ export default function HomePage() {
                                                                 width: '60px', margin:'20px'
                                                             }}
                                                         />
+                                                    </IconButton>
                                                         <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'75px', width:'1000px', marginLeft:'450px' }}>
                                                             {/* Column 1 */}
                                                             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -204,8 +212,8 @@ export default function HomePage() {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <p style={{fontWeight:'bold'}}>Philippine - English</p>
-                                                            <p>2023 Acadzen Inc.</p>
+                                                            <p style={{fontWeight:'bold'}}> 🌐︎ Philippine - English</p>
+                                                            <p>© 2023 Acadzen Inc.</p>
                                                         </div>
                                             </div>
                                         </div>
