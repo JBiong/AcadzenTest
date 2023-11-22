@@ -15,8 +15,7 @@ root.render(
     {/* <App /> */}
     {/* <HomePage/> */}
     {/* <Dashboard/> */}
-    {/* <UploadDocument/> */}
-    <AboutAcadZen/>
+    <UploadDocument/>
   </React.StrictMode>
 );
 

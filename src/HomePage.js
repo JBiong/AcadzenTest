@@ -10,6 +10,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import styles from './HomePage.module.css';
+import UploadDocument from './LearningSession';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -37,6 +38,7 @@ export default function HomePage() {
             <div className={styles.homebg}>
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path='/learningsession' element={<UploadDocument />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />
                     <Route path="/signup" element={<Signup handleToggle={() => setShowLogin(false)} />} />
                     <Route
@@ -92,10 +94,10 @@ export default function HomePage() {
                                 )}
                                 {showHometoabout && (
                                     <div className={styles.homeaboutbg}>
-                                        <h1 style={{fontSize:'60px', width:'1100px', marginLeft:'18%'}}>Excel in your courses using our latest set of study resources.</h1>
+                                        <h1 style={{fontSize:'60px', width:'1100px', marginLeft:'23%'}}>Excel in your courses using our latest set of study resources.</h1>
                                     
                                         <div className={styles.hometoabout}></div>
-                                            <div style={{ marginTop:'900px', height:'80vh', display:'flex', flexDirection:'row'}}>
+                                            <div style={{ marginTop:'900px', height:'80vh', display:'flex', flexDirection:'row',marginLeft:'5%' }}>
                                                     <img
                                                         src="uploadimg.png"
                                                         alt="upl"
@@ -124,6 +126,87 @@ export default function HomePage() {
                                                     </Button>
                                                 </Link>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div style={{backgroundColor:'#FFFFFF'}}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'250px' }}>
+                                                {/* Column 1 */}
+                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                    <h1>About</h1>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About us</Button>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About Acadzen</Button>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Get the app</Button>
+                                                </div>
+
+                                                {/* Column 2 */}
+                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                    <h1>For Students</h1>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Flashcards</Button>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Quiz</Button>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Learn</Button>
+                                                </div>
+
+                                                {/* Column 3 */}
+                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                    <h1>Resources</h1>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Terms</Button>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Guidelines</Button>
+                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Honor Code</Button>
+                                                </div>
+                                            </div>
+                                            <hr style={{ border: 'none', borderBottom: '1px solid grey', margin: '50px', marginTop:'25px' }} />
+                                            <div style={{backgroundColor:'#FFFFFF', marginTop:'50px', height:'350px'}}>
+                                                        <img
+                                                            src="insta.png"
+                                                            alt="insta"
+                                                            style={{
+                                                                width: '60px', margin:'20px'
+                                                            }}
+                                                        />
+                                                        <img
+                                                            src="facebook.png"
+                                                            alt="fb"
+                                                            style={{
+                                                                width: '60px', margin:'20px'
+                                                            }}
+                                                        />
+                                                        <img
+                                                            src="twitter.png"
+                                                            alt="X"
+                                                            style={{
+                                                                width: '60px', margin:'20px'
+                                                            }}
+                                                        />
+                                                        <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'75px', width:'1000px', marginLeft:'450px' }}>
+                                                            {/* Column 1 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Privacy Policy</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 2 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Cookie Policy</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 3 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Legal Notice</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 4 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Accessibility Policy</p>
+                                                            </div>
+                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
+                                                            {/* Column 4 */}
+                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                                                <p>Cookie Settings</p>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <p style={{fontWeight:'bold'}}>Philippine - English</p>
+                                                            <p>2023 Acadzen Inc.</p>
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
