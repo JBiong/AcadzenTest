@@ -7,12 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import HomePage from './HomePage';
 import Dashboard from './Dashboard';
 import UploadDocument from './UploadDocument';
-<<<<<<< HEAD
 import LearningSession from './LearningSession';
-=======
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
->>>>>>> b1b8a4e45e8705ea1351b9a739cbb099211ee46b
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,12 +18,9 @@ root.render(
     {/* <HomePage/> */}
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
-<<<<<<< HEAD
     {/* <LearningSession/> */}
-=======
     {/* <AboutAcadZen/> */}
     <AboutUs/>
->>>>>>> b1b8a4e45e8705ea1351b9a739cbb099211ee46b
   </React.StrictMode>
 );
 
