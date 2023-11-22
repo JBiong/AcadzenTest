@@ -6,7 +6,8 @@ import HomeIcon from "@mui/icons-material/Home";
 function UploadDocument() {
     return (
     <>
-        <AppBar position="static" style={{background: 'none', boxShadow: 'none', padding: '10px', marginTop: '20px'}}>
+    <div className="welcome-back-page">
+        <AppBar style={{background: 'none', boxShadow: 'none', padding: '10px', marginTop: '20px'}}>
             <Toolbar>
                 <img src= "/logo.png" alt="App Logo" style={{width: 100, marginLeft: '50px'}}/>
                 <Typography variant="h3" style={{fontFamily: 'Poppin, sans-serif', fontWeight: '600', fontSize: '40px',color: '#B18A00'}}
@@ -30,35 +31,35 @@ function UploadDocument() {
         </AppBar>
 
         <div className="upload-document-content">
-        {/* Left Panel for Browsing/Uploading Files */}
-        <div className="left-panel">
-            <img src= "/document icon.png" alt="Document Icon" style={{width: 100, marginTop: '120px', marginBottom: '30px'}}/>
-            <Typography variant="h4" style={{ fontFamily: 'Roboto Condensed', fontSize: '20px', color: 'black', textAlign: 'center', fontWeight: 'bold'}}>
-                Supported document types: PDF, DOCX, TXT, PPTX
-            </Typography>
-            <div style={{marginTop: '60px'}}>
-            <Button style={{background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px'}}> 
-                <Typography style={{fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none'}}>
-                     Browse 
-                </Typography> 
-            </Button>
+            {/* Left Panel for Browsing/Uploading Files */}
+            <div className="left-panel">
+                <img src= "/document icon.png" alt="Document Icon" style={{width: 100, marginTop: '120px', marginBottom: '30px'}}/>
+                <Typography variant="h4" style={{ fontFamily: 'Roboto Condensed', fontSize: '20px', color: 'black', textAlign: 'center', fontWeight: 'bold'}}>
+                    Supported document types: PDF, DOCX, TXT, PPTX
+                </Typography>
+                <div style={{marginTop: '60px'}}>
+                <Button style={{background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px'}}> 
+                    <Typography style={{fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none'}}>
+                        Browse 
+                    </Typography> 
+                </Button>
+                </div>
+                <Button style={{background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px', marginTop: '170px'}}> 
+                    <Typography style={{fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none'}}>
+                        Upload Document 
+                    </Typography> 
+                </Button>
             </div>
-            <Button style={{background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px', marginTop: '170px'}}> 
-                <Typography style={{fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none'}}>
-                     Upload Document 
-                </Typography> 
-            </Button>
-        </div>
 
-        {/* Right Panel for Displaying Uploaded Files */}
-        <div className="right-panel">
-        <Typography variant="h4" style={{ fontFamily: 'Roboto Condensed', fontSize: '30px', color: '#332D2D', textAlign: 'left', margin: '10px' }}>
-            Uploaded Documents
-        </Typography>
-        {/* Add your file display components here */}
+            {/* Right Panel for Displaying Uploaded Files */}
+            <div className="right-panel">
+            <Typography variant="h4" style={{ fontFamily: 'Roboto Condensed', fontSize: '30px', color: '#332D2D', textAlign: 'left', margin: '10px' }}>
+                Uploaded Documents
+            </Typography>
+            {/* Add your file display components here */}
+            </div>
         </div>
-        </div>
-
+    </div>
     </>
     );
 }

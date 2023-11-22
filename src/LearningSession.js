@@ -3,7 +3,7 @@ import "./LearningSession.css";
 import { AppBar, Toolbar, Typography, IconButton, Box, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 
-function UploadDocument() {
+function LearningSession() {
     return (
     <>
     <div className="welcome-back-page">
@@ -44,10 +44,10 @@ function UploadDocument() {
         </Typography>
         {/* Add your file display components here */}
         </div>
-        </div>
+    </div>
 
     </>
     );
 }
 
-export default UploadDocument;
+export default LearningSession;

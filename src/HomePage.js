@@ -12,6 +12,8 @@ import Dashboard from './Dashboard';
 import styles from './HomePage.module.css';
 import LearningSession from './LearningSession';
 import UploadDocument from './UploadDocument';
+import AboutUs from './AboutUs';
+import AboutAcadZen from './AboutAcadZen';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -41,6 +43,8 @@ export default function HomePage() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/learningsession' element={<LearningSession />} />
                     <Route path='/uploaddocument' element={<UploadDocument />} />
+                    <Route path='/aboutus' element={<AboutUs />} />
+                    <Route path='/aboutacadzen' element={<AboutAcadZen />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />
                     <Route path="/signup" element={<Signup handleToggle={() => setShowLogin(false)} />} />
                     <Route
@@ -135,8 +139,8 @@ export default function HomePage() {
                                                 {/* Column 1 */}
                                                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                                                     <h1>About</h1>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About us</Button>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About Acadzen</Button>
+                                                    <Link to="/aboutus"><Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About us</Button></Link>
+                                                    <Link to="/aboutacadzen"><Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About Acadzen</Button></Link>
                                                     <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Get the app</Button>
                                                 </div>
 

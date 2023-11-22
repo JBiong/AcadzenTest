@@ -15,6 +15,7 @@ function AboutUs() {
 
     return (
         <>
+        <div className="welcome-back-page">
         <div className = "AboutBg">
         <AppBar position="fixed" style={{ background: 'white' }}>
             <Toolbar
@@ -276,6 +277,7 @@ function AboutUs() {
                 <Typography variant="body2" mt={2}>
                     © 2023 AcadZen Inc.
                 </Typography>
+        </div>
         </div>
         </>
     );
