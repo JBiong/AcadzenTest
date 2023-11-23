@@ -14,6 +14,11 @@ import LearningSession from './LearningSession';
 import UploadDocument from './UploadDocument';
 import AboutUs from './AboutUs';
 import AboutAcadZen from './AboutAcadZen';
+import {Grid, Divider} from "@mui/material";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import LanguageIcon from '@mui/icons-material/Language';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -35,6 +40,17 @@ export default function HomePage() {
         setIsSignInView(false);
         setShowHometoabout(false);
     };
+
+    // when button is clicked, the screen/scroll view is on the top para nice haha
+    const handleButtonClick = () => {
+        window.scrollTo(0,0);
+      };
+
+    // kani kay para clickable lang icons 
+    const handleParagraphClick = (item) => {
+        console.log(`Clicked on ${item}`);
+      };
+
 
     return (
         <Router>
@@ -134,92 +150,58 @@ export default function HomePage() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style={{backgroundColor:'#FFFFFF'}}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'250px' }}>
-                                                {/* Column 1 */}
-                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                    <h1>About</h1>
-                                                    <Link to="/aboutus"><Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About us</Button></Link>
-                                                    <Link to="/aboutacadzen"><Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>About Acadzen</Button></Link>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Get the app</Button>
-                                                </div>
-
-                                                {/* Column 2 */}
-                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                    <h1>For Students</h1>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Flashcards</Button>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Quiz</Button>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Learn</Button>
-                                                </div>
-
-                                                {/* Column 3 */}
-                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                    <h1>Resources</h1>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Terms</Button>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Guidelines</Button>
-                                                    <Button style={{color:'#000000', textDecoration: 'none', ':hover': { textDecoration: 'underline' } }}>Honor Code</Button>
-                                                </div>
+                                        <div className={styles.AppInfo}>
+                                            <div className={styles.gridItem}>
+                                                <h2>About</h2>
+                                                <Link to="/aboutus"><Button onClick={handleButtonClick}>About us</Button></Link>
+                                                <Link to="/aboutacadzen"><Button onClick={handleButtonClick}>About AcadZen</Button></Link>
+                                                <Button>Get the app</Button>
                                             </div>
-                                            <hr style={{ border: 'none', borderBottom: '1px solid grey', margin: '50px', marginTop:'25px' }} />
-                                            <div style={{backgroundColor:'#FFFFFF', marginTop:'50px', height:'350px'}}>
-                                                    <IconButton>
-                                                        <img
-                                                            src="insta.png"
-                                                            alt="insta"
-                                                            style={{
-                                                                width: '60px', margin:'20px'
-                                                            }}
-                                                        />
-                                                    </IconButton>
-                                                    <IconButton>
-                                                        <img
-                                                            src="facebook.png"
-                                                            alt="fb"
-                                                            style={{
-                                                                width: '60px', margin:'20px'
-                                                            }}
-                                                        />
-                                                    </IconButton>
-                                                    <IconButton>
-                                                        <img
-                                                            src="twitter.png"
-                                                            alt="X"
-                                                            style={{
-                                                                width: '60px', margin:'20px'
-                                                            }}
-                                                        />
-                                                    </IconButton>
-                                                        <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor:'#FFFFFF', height:'75px', width:'1000px', marginLeft:'450px' }}>
-                                                            {/* Column 1 */}
-                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                                <p>Privacy Policy</p>
-                                                            </div>
-                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
-                                                            {/* Column 2 */}
-                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                                <p>Cookie Policy</p>
-                                                            </div>
-                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
-                                                            {/* Column 3 */}
-                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                                <p>Legal Notice</p>
-                                                            </div>
-                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
-                                                            {/* Column 4 */}
-                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                                <p>Accessibility Policy</p>
-                                                            </div>
-                                                            <Box sx={{ marginTop: '15px', color: '#8C7111' }}>|</Box>
-                                                            {/* Column 4 */}
-                                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                                                <p>Cookie Settings</p>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <p style={{fontWeight:'bold'}}> 🌐︎ Philippine - English</p>
-                                                            <p>© 2023 Acadzen Inc.</p>
-                                                        </div>
+
+                                            <div className={styles.gridItem}>
+                                                <h2>For Students</h2>
+                                                <Button>Flashcards</Button>
+                                                <Button>Quiz</Button>
+                                                <Button>Learn</Button>
                                             </div>
+
+                                            <div className={styles.gridItem}>
+                                                <h2>Resources</h2>
+                                                <Button>Terms</Button>
+                                                <Button>Guidelines</Button>
+                                                <Button>Honor code</Button>
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.footer}>
+                                            <Divider style={{ marginBottom: '16px', backgroundColor: '#C8C8C8' }} />
+                                            <Grid container spacing={4} justifyContent="center">
+                                            <Grid item>
+                                                <IconButton onClick={() => handleParagraphClick('Icon 1')}>
+                                                <InstagramIcon style={{fontSize: '60px', color: 'black'}}/>
+                                                </IconButton>
+                                            </Grid>
+                                            <Grid item>
+                                                <IconButton onClick={() => handleParagraphClick('Icon 2')}>
+                                                <FacebookIcon style={{fontSize: '60px', color: 'black'}} />
+                                                </IconButton>
+                                            </Grid>
+                                            <Grid item>
+                                                <IconButton onClick={() => handleParagraphClick('Icon 3')}>
+                                                <TwitterIcon style={{fontSize: '60px', color: 'black'}} />
+                                                </IconButton>
+                                            </Grid>
+                                            </Grid>
+                                                <Typography variant="h6" mt={2}>
+                                                    Privacy Policy &nbsp; | &nbsp; Cookie Policy &nbsp; | &nbsp; Legal Notice &nbsp; | &nbsp; Accessibility Policy &nbsp; | &nbsp; Cookie Settings
+                                                </Typography>
+                                                <Typography variant="body2" mt={2} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                                    <LanguageIcon style={{ marginRight: '6px' }} />
+                                                    <strong>Philippines - English</strong>
+                                                </Typography>
+                                                <Typography variant="body2" mt={2}>
+                                                    © 2023 AcadZen Inc.
+                                                </Typography>
                                         </div>
                                     </div>
                                 )}

@@ -14,7 +14,7 @@ function AboutUs() {
           window.scrollTo(0,0);
         };
 
-    // kani kay para clickable lang icons 
+    // kani kay para clickable lang ang icons
     const handleParagraphClick = (item) => {
         console.log(`Clicked on ${item}`);
       };
