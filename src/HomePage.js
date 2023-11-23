@@ -68,37 +68,36 @@ export default function HomePage() {
                         element={
                             <Box sx={{ flexGrow: 1 }}>
                                 {!hideAppBar && (
-                                    <AppBar position="fixed" style={{ backgroundColor: '#FFFFFF' }}>
-                                        <Toolbar>
-                                            <IconButton
-                                                size="large"
-                                                edge="start"
-                                                color="inherit"
-                                                aria-label="menu"
-                                                sx={{ mr: 2 }}
+                                    <AppBar position="fixed" style={{ background: 'white' }}>
+                                        <Toolbar
+                                            sx={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            }}
+                                        >
+                                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <img src="/logo.png" alt="App Logo" style={{ width: 60 }} />
+                                            <Typography
+                                                variant="h4"
+                                                sx={{
+                                                fontFamily: 'Poppin, sans-serif',
+                                                fontWeight: '600',
+                                                fontSize: '30px',
+                                                color: '#B18A00',
+                                                marginLeft: '8px', // Adjust the spacing as needed
+                                                }}
                                             >
-                                                <img
-                                                    src="logo.png"
-                                                    alt="AcadZen Logo"
-                                                    style={{
-                                                        width: '90px',
-                                                    }}
-                                                />
-                                            </IconButton>
-                                            <Typography variant="h4" className={styles.homeacadzen} style={{ fontWeight: 'bold', fontSize: '45px' }}>
                                                 AcadZen
                                             </Typography>
-                                            <>
-                                                <Link to="/signup" style={{ textDecoration: 'none' }}>
-                                                    <Button style={{ color: "#8C7111", fontWeight: 'bold' }}>Sign up</Button>
-                                                </Link>
-                                                <Box sx={{ margin: '0 8px', color: '#8C7111' }}>|</Box>
-                                                <Link to="/login" style={{ textDecoration: 'none' }}>
-                                                    <Button style={{ color: "#8C7111", fontWeight: 'bold' }}>Login</Button>
-                                                </Link>
-                                            </>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <Link to="/signup" style={{ textDecoration: 'none' }}><Button style={{ color: '#8C7111', fontWeight: 'bold' }}>Sign up</Button></Link>
+                                            <Box sx={{ marginX: '8px', color: '#8C7111' }}>|</Box>
+                                            <Link to="/login" style={{ textDecoration: 'none' }}><Button style={{ color: '#8C7111', fontWeight: 'bold' }}>Login</Button></Link>
+                                            </div>
                                         </Toolbar>
-                                    </AppBar>
+                                </AppBar>
                                 )}
                                 {!hideAppBar && ( 
                                     <div className={styles.contentContainer}>
