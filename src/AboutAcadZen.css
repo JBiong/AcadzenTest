@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     height: auto;
     width: auto;
-    padding-bottom: 50px;
+    padding-bottom: 110px;
 }  
 
 .AppInfo{
@@ -15,25 +15,31 @@
     width: auto;
     padding: 10px; /* Add padding for better spacing */
     margin-left: 200px;
+    
   }
   
   .grid-item {
-    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
-    padding: 20px;
-    text-align: left;
+    padding: 10px;
+
     font-family: 'Inter';
+    display:flex;
+    flex-direction: column;
+    align-items: left;
   }
   .grid-item h2 {
       font-size: 30px;
       font-weight: bold;
   }
 
-  .grid-item p {
+  .grid-item Button {
+    color: black;
     font-size: 25px;
     cursor: pointer;
+    text-transform: none;
+    align-self: flex-start;
   }
   
-  .grid-item p:hover {
+  .grid-item Button:hover {
     color: #9b7f11; /* Change the background color as desired */
   }
 

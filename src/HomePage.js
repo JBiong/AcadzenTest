@@ -114,7 +114,7 @@ export default function HomePage() {
                                                 <div style={{marginLeft:'8%',textAlign:'left', height:'600px'}}>
                                                     <div>
                                                     <Typography variant="h3" component="div"  style={{fontWeight: 'bold', color:'#000000', width:'800px', fontSize:'60px'}}>
-                                                        Preapare yourself for the day of the test.
+                                                        Prepare yourself for the day of the test.
                                                     </Typography>
                                                 </div>
                                                 <div style={{width:'475px', color:'#787360'}}>

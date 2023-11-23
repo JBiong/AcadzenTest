@@ -8,9 +8,14 @@ import LanguageIcon from '@mui/icons-material/Language';
 import { Link } from "react-router-dom";
 
 function AboutUs() {
+    
+    // when button is clicked, the screen/scroll view is on the top para nice haha
+    const handleButtonClick = () => {
+          window.scrollTo(0,0);
+        };
 
+    // kani kay para clickable lang icons 
     const handleParagraphClick = (item) => {
-        // Handle the click action, for example, navigate to a new page or perform some action
         console.log(`Clicked on ${item}`);
       };
 
@@ -227,25 +232,25 @@ function AboutUs() {
         </div>
 
         <div className="AppInfo">
-             <div className="grid-item" onClick={(e) => handleParagraphClick('About')}>
+             <div className="grid-item">
                 <h2>About</h2>
-                <p onClick={() => handleParagraphClick('About us')} style={{ cursor: 'pointer' }}>About us</p>
-                <p onClick={() => handleParagraphClick('About AcadZen')} style={{ cursor: 'pointer' }}>About AcadZen</p>
-                <p onClick={() => handleParagraphClick('Get the app')} style={{ cursor: 'pointer' }}>Get the app</p>
+                <Link to="/aboutus"><Button onClick={handleButtonClick}>About us</Button></Link>
+                <Link to="/aboutacadzen"><Button onClick={handleButtonClick}>About AcadZen</Button></Link>
+                <Button>Get the app</Button>
             </div>
 
             <div className="grid-item">
                 <h2>For Students</h2>
-                <p>Flashcards</p>
-                <p>Quiz</p>
-                <p>Learn</p>
+                <Button>Flashcards</Button>
+                <Button>Quiz</Button>
+                <Button>Learn</Button>
             </div>
 
             <div className="grid-item">
                 <h2>Resources</h2>
-                <p>Terms</p>
-                <p>Guidelines</p>
-                <p>Honor code</p>
+                <Button>Terms</Button>
+                <Button>Guidelines</Button>
+                <Button>Honor code</Button>
             </div>
          </div>
 
