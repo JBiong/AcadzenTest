@@ -4,8 +4,10 @@
   background-image: url('/public/crystalbackground.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat:repeat;
   height: 100vh;
+  width: 100%;
+  position: fixed;
 }  
 
 .lsbody::before {
@@ -37,16 +39,16 @@
     grid-template-columns: 1fr 1fr; /* Two equal columns */
     gap: 20px; /* Adjust the gap between the columns */
     padding: 20px;
-    margin: 75px;
+    margin: 20px;
+    margin-top: 80px;
   }
   
   .left-panel{
     background: white;
     border-radius: 15px;
     padding: 20px;
-    width: 757px;
+    width: 730px;
     height: 478px;
-    margin-left: 50px;
     margin-top: 90px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     border: 3px dashed #A58585;
@@ -60,7 +62,6 @@
     width: 700px;
     height: 622px;
     margin-left: 30px;
-    margin-right: 20px;
     margin-top: 90px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     border: 6px dashed #A58585,
