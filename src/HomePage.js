@@ -19,6 +19,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LanguageIcon from '@mui/icons-material/Language';
+import ProfileSettings from './ProfileSettings';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -63,6 +64,7 @@ export default function HomePage() {
                     <Route path='/aboutacadzen' element={<AboutAcadZen />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />
                     <Route path="/signup" element={<Signup handleToggle={() => setShowLogin(false)} />} />
+                    <Route path='/profilesettings' element={<ProfileSettings/>} />
                     <Route
                         path="/"
                         element={

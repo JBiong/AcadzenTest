@@ -3,6 +3,7 @@ import "./UploadDocument.css";
 import { AppBar, Toolbar, Typography, IconButton, Box, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 
 
 function UploadDocument() {
@@ -51,9 +52,11 @@ function UploadDocument() {
                 </div>
                 <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px'}}>
                     <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px'}}>
-                        <IconButton color="black" style={{ fontSize: '45px'}}>
-                        <HomeIcon style={{ fontSize: '80%', width: '100%'}} />
+                        <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                        <IconButton color="black" style={{ fontSize: '45px' }}>
+                        <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
                         </IconButton>
+                    </Link>
                     </Box>
                 </Box>
             </Toolbar>

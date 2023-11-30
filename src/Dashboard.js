@@ -9,6 +9,7 @@ import SpaIcon from '@mui/icons-material/Spa';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -21,6 +22,11 @@ const Dashboard = () => {
   const [settingClicked, setSettingClicked] = useState(false);
   const [contactUsClicked, setContactUsClicked] = useState(false);
 
+  const [enteredUsername, setEnteredUsername] = useState(""); // Use the entered username
+  const [userName, setUserName] = useState(""); // Set a default value
+
+  
+
   useEffect(() => {
     // Check if the current location is /dashboard and set the Overview button state accordingly
     setOverviewClicked(location.pathname === "/dashboard");
@@ -28,8 +34,21 @@ const Dashboard = () => {
     setDreamboardClicked(location.pathname === "/dreamboard");
     setMentalHealthClicked(location.pathname === "/mentalhealth");
     setPricingClicked(location.pathname === "/pricing");
+    setSettingClicked(location.pathname === "/profilesettings")
     setContactUsClicked(location.pathname === "/contactus");
-  }, [location.pathname]);
+    
+    // Extract entered username from location state
+    const newEnteredUsername = location.state?.enteredUsername || "";
+    setEnteredUsername(newEnteredUsername);
+    // Retrieve userno from localStorage
+    const storedUserNo = localStorage.getItem('userno');
+    console.log(storedUserNo); // Use this userno as needed
+    // Retrieve username from localStorage
+    const storedUsername = localStorage.getItem('username');
+    setUserName(storedUsername || "Guest");
+    console.log(storedUsername);
+    // setUserName(newEnteredUsername || "Guest");
+  }, [location.pathname, location.state?.enteredUsername]);
 
   const handleButtonClick = (button) => {
     switch (button) {
@@ -200,7 +219,8 @@ const Dashboard = () => {
           }}
           onClick={() => handleButtonClick('pricing')}
         ><MonetizationOnIcon style={{marginRight:'10px'}}/> Pricing</Button>
-            <Button
+          <Link to="/profilesettings" style={{ textDecoration: 'none' }}>
+          <Button
           color="inherit"
           type="submit"
           variant={settingClicked ? "contained" : "outlined"}
@@ -216,6 +236,7 @@ const Dashboard = () => {
           }}
           onClick={() => handleButtonClick('setting')}
         ><SettingsIcon style={{marginRight:'10px'}}/> Setting</Button>
+        </Link>
         </Box>
       </Toolbar>
       <div className="contactusdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -240,19 +261,19 @@ const Dashboard = () => {
               Welcome Back,
             </Typography>
             <Typography variant="h3" style={{ fontWeight: 'bold' }}>
-              James Bond!
+              {userName}
             </Typography>
           </div>
         </Toolbar>
         <div className="quizact">
           <h3>Recent Quiz Activity</h3>
           <div className="insidequizdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}></div>
-          <div className="recentdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
+        </div>
+        <div className="recentdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
           <div className="uploadstatus" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
           <div className="currentstreakdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
           <div className="mottocontainer"></div>
           <div className="dreamboardnote"></div>
-        </div>
       </div>
     </div>
   );

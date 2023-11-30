@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Button, Grid, TextField, Toolbar, Typography } from "@mui/material";
 import Dashboard from "./Dashboard";
 import "./login.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  // Replace useHistory with useNavigate
+  const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(""); // State to store error messages
@@ -20,35 +22,64 @@ const Login = () => {
     const password = event.target.elements.password.value;
 
     try {
-      const response = await fetch("http://localhost:8080/api/acadzen/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+        const response = await fetch("http://localhost:8080/api/user/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        });
 
-      if (response.ok) {
-        // Login successful
-        setIsLoggedIn(true);
-      } else {
-        // Handle login error
-        const data = await response.json();
-        setError(data.message || "Login failed");
-      }
+        if (response.ok) {
+            // Login successful
+            setIsLoggedIn(true);
+
+            // Store username in localStorage
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+
+            const userDetails = await response.json();
+            // Store userno in localStorage
+            localStorage.setItem('userno', userDetails.userno);
+            localStorage.setItem('email', userDetails.email);
+
+            // Pass username to Dashboard component using history
+            navigate("/dashboard", { state: { enteredUsername: username } });
+            // navigate("/profilesettings", { state: { enteredPassword : password}});
+        } else {
+            // Handle login error
+            const data = await response.json();
+            setError(data.message || "Login failed");
+        }
     } catch (error) {
-      console.error("Error during login:", error);
-      setError("An error occurred during login");
+        console.error("Error during login:", error);
+        setError("An error occurred during login");
     }
   };
 
   const handleSignup = async (event) => {
     event.preventDefault();
 
+    // Password validation criteria
+    // Length, Letters, Digit, Special those are the in order
+    // const passwordRegex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
+    // lc, uc, no., special, uc, lc, no., special, min 8 characters
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
     console.log("Submitting:", { email, username, password });
 
+    if (!password.match(passwordRegex)) {
+      // Password doesn't meet the criteria
+      console.error("Password does not meet the requirements");
+      // You can display an error message to the user or use a state to show a validation message
+      console.log("Password:", password);
+      console.log("Is valid password:", password.match(passwordRegex));
+
+      return;
+    }
+
     try {
-      const response = await fetch("http://localhost:8080/api/acadzen/insert", {
+      const response = await fetch("http://localhost:8080/api/user/insertUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -186,6 +217,7 @@ const Login = () => {
                 style={{ marginBottom: "20px" }}
                 required
                 className="login-form__input"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -209,6 +241,9 @@ const Login = () => {
                 style={{ marginBottom: "20px" }}
                 required
                 className="login-form__input"
+                inputProps={{
+                  pattern: "{8,}"
+                }}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

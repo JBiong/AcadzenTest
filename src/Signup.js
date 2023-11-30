@@ -12,11 +12,27 @@ const Signup = () => {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-
+  
+    // Password validation criteria
+    // Length, Letters, Digit, Special those are the in order
+    // const passwordRegex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
+    // lc, uc, no., special, uc, lc, no., special, min 8 characters [sample : yuYU123@As1!]
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  
     console.log("Submitting:", { email, username, password });
+  
+    if (!password.match(passwordRegex)) {
+      // Password doesn't meet the criteria
+      console.error("Password does not meet the requirements");
+      // You can display an error message to the user or use a state to show a validation message
+      console.log("Password:", password);
+      console.log("Is valid password:", password.match(passwordRegex));
 
+      return;
+    }
+  
     try {
-      const response = await fetch("http://localhost:8080/api/acadzen/insert", {
+      const response = await fetch("http://localhost:8080/api/user/insertUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +43,7 @@ const Signup = () => {
           password,
         }),
       });
-
+  
       if (response.ok) {
         // Signup successful, set isAccountCreated to true
         setIsAccountCreated(true);
@@ -40,6 +56,7 @@ const Signup = () => {
       console.error("Error during signup:", error);
     }
   };
+  
 
   // Render Login component if isAccountCreated is true
   if (isAccountCreated) {
@@ -85,6 +102,7 @@ const Signup = () => {
                 style={{ marginBottom: "20px" }}
                 required
                 className="login-form__input"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
