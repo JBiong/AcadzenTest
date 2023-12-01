@@ -2,8 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import "./UploadDocument.css";
 import { AppBar, Toolbar, Typography, IconButton, Box, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import { useState } from 'react';
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import CancelIcon from "@mui/icons-material/Cancel";
+import SaveIcon from "@mui/icons-material/Save";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie'; 
 
 function UploadDocument() {
     const fileInputRef = useRef(null);
@@ -185,6 +190,8 @@ function UploadDocument() {
         const file = e.target.files[0];
 
         if (file && editIndex !== null) {
+            // // Set the new file in the edit state
+            // setNewFile(file);
             // Set the new file in the edit state for this index
             setEditStates((prevStates) => {
                 const newStates = [...prevStates];
@@ -217,49 +224,49 @@ function UploadDocument() {
 };
 
 
-const handleSaveEdit = async (index) => {
-    try {
-        console.log('Save edit clicked. EditIndex:', index);
-        if (index !== null && newFileName.trim() !== "") {
-            const documentID = uploadedFiles[index]?.documentID;
+    const handleSaveEdit = async () => {
+        try {
+            console.log('Save edit clicked. EditIndex:', editIndex);
+          if (editIndex !== null && newFileName.trim() !== "") {
+            const documentID = uploadedFiles[editIndex]?.documentID;
             console.log('Document ID before update:', documentID);
-            const newFile = editStates[index]?.newFile;
+            const newFile = editStates[editIndex]?.newFile;
 
-            console.log('Document ID:', documentID);
+             console.log('Document ID:', documentID);
             console.log('New File:', newFile);
-
+      
             if (!documentID) {
-                console.error('Document ID not found for editIndex:', index);
-                return;
+              console.error('Document ID not found for editIndex:', editIndex);
+              return;
             }
-
+      
             const formData = new FormData();
             formData.append('document', new Blob([JSON.stringify({ documentTitle: newFileName })], { type: 'application/json' }));
-
+            
             // Append the new file if it exists
             if (newFile) {
-                formData.append('file', newFile);
+              formData.append('file', newFile);
             }
 
             // Add this console.log to inspect the uploadedFiles array
             console.log('Uploaded Files before update:', uploadedFiles);
-
-            const response = await fetch(`http://localhost:8080/api/document/update/${documentID}`, {
-                method: 'PUT',
-                body: formData,
-                headers: {},
+      
+            const response = await fetch(`http://localhost:8080/api/document/update/${documentID}`, {  
+              method: 'PUT',
+              body: formData,
+              headers: {},
             });
-
+      
             console.log('Response Status:', response.status);
             const responseBody = await response.text();
             console.log('Response Body:', responseBody);
-
+      
             if (!response.ok) {
-                throw new Error('File update failed. Please try again.');
+              throw new Error('File update failed. Please try again.');
             }
-
+      
             const updatedFiles = uploadedFiles.map((file, i) => {
-                if (i === index) {
+                if (i === editIndex ) {
                     return {
                         documentID: documentID,
                         documentTitle: newFileName || file.documentTitle,
@@ -270,28 +277,28 @@ const handleSaveEdit = async (index) => {
                     return file;
                 }
             });
-
+      
             setUploadedFiles(updatedFiles);
-            handleCancelEdit(index);
-
+            handleCancelEdit();
+      
             toast.success('File successfully updated!', {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 500,
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 500,
             });
-        } else {
+          } else {
             toast.error('Please provide a new name to update.', {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 1000,
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1000,
             });
-        }
-    } catch (error) {
-        console.error('Error in handleSaveEdit:', error);
-        toast.error(error.message, {
+          }
+        } catch (error) {
+          console.error('Error in handleSaveEdit:', error);
+          toast.error(error.message, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1000,
-        });
-    }
-};      
+          });
+        }
+      };      
     
 
     const handleGenerateClick = (index) => {
@@ -301,31 +308,32 @@ const handleSaveEdit = async (index) => {
 
     // Add ToastContainer at the root level of your component tree
     return (
-    <>
-    <div className="welcome-back-page">
-    <div className="lsbody">
-        <AppBar style={{background: 'none', boxShadow: 'none', padding: '10px', marginTop: '20px'}}>
-            <Toolbar>
-                <img src= "/logo.png" alt="App Logo" style={{width: 100, marginLeft: '50px'}}/>
-                <Typography variant="h3" style={{fontFamily: 'Poppin, sans-serif', fontWeight: '600', fontSize: '40px',color: '#B18A00'}}
-                >AcadZen
-                </Typography>
-                <div style={{ display: 'flex', alignItems: 'center', width: '100%', padding: '10px', marginLeft: '50px'}}>
-                    <div style={{ background: 'white', borderRadius: '15px', textAlign: 'center', height: '55px', width: '1101px', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}>
-                        <Typography variant="h4" style={{ fontFamily: "Roboto Condensed", fontSize: '35px',color: '#332D2D', textAlign: 'center' }}
-                        >Document to Flashcard Converter
-                        </Typography>
-                    </div>
-                </div>
-                <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px'}}>
-                    <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px'}}>
-                        <IconButton color="black" style={{ fontSize: '45px'}}>
-                        <HomeIcon style={{ fontSize: '80%', width: '100%'}} />
-                        </IconButton>
-                    </Box>
-                </Box>
-            </Toolbar>
-        </AppBar>
+        <>
+            <ToastContainer />
+            <div className="welcome-back-page">
+                <div className="lsbody">
+                    <AppBar style={{ background: 'none', boxShadow: 'none', padding: '10px', marginTop: '20px' }}>
+                        <Toolbar>
+                            <img src="/logo.png" alt="App Logo" style={{ width: 100, marginLeft: '50px' }} />
+                            <Typography variant="h3" style={{ fontFamily: 'Poppin, sans-serif', fontWeight: '600', fontSize: '40px', color: '#B18A00' }}
+                            >AcadZen
+                            </Typography>
+                            <div style={{ display: 'flex', alignItems: 'center', width: '100%', padding: '10px', marginLeft: '50px' }}>
+                                <div style={{ background: 'white', borderRadius: '15px', textAlign: 'center', height: '55px', width: '1101px', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)' }}>
+                                    <Typography variant="h4" style={{ fontFamily: "Roboto Condensed", fontSize: '35px', color: '#332D2D', justifyContent: 'center', marginTop: '3px' }}
+                                    >Document to Flashcard Converter
+                                    </Typography>
+                                </div>
+                            </div>
+                            <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px' }}>
+                                <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
+                                    <IconButton color="black" style={{ fontSize: '45px' }}>
+                                        <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
+                                    </IconButton>
+                                </Box>
+                            </Box>
+                        </Toolbar>
+                    </AppBar>
 
                     <div className="upload-document-content">
 
