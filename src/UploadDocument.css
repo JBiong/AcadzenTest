@@ -1,24 +1,17 @@
 .lsbody {
-  margin-bottom: auto 0px; 
-  padding: 0; 
   background-image: url('/public/crystalbackground.png');
   background-size: cover;
-  background-position: center;
-  background-repeat:repeat;
   height: 100vh;
   width: 100%;
-  /* position: fixed; */
+  position:absolute;
 }  
 
 .lsbody::before {
   content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.3); /* Adjust the last value to change the opacity */
-  z-index: -1; /* Ensure the pseudo-element is behind the content */
+  z-index: -1; 
 }
 
 .header {
