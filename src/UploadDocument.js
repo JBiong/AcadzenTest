@@ -2,13 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import "./UploadDocument.css";
 import { AppBar, Toolbar, Typography, IconButton, Box, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import CancelIcon from "@mui/icons-material/Cancel";
-import SaveIcon from "@mui/icons-material/Save";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Cookies from 'js-cookie'; 
+import { useState } from 'react';
+
 
 function UploadDocument() {
     const fileInputRef = useRef(null);
@@ -306,32 +301,31 @@ const handleSaveEdit = async (index) => {
 
     // Add ToastContainer at the root level of your component tree
     return (
-        <>
-            <ToastContainer />
-            <div className="welcome-back-page">
-                <div className="lsbody">
-                    <AppBar style={{ background: 'none', boxShadow: 'none', padding: '10px', marginTop: '20px' }}>
-                        <Toolbar>
-                            <img src="/logo.png" alt="App Logo" style={{ width: 100, marginLeft: '50px' }} />
-                            <Typography variant="h3" style={{ fontFamily: 'Poppin, sans-serif', fontWeight: '600', fontSize: '40px', color: '#B18A00' }}
-                            >AcadZen
-                            </Typography>
-                            <div style={{ display: 'flex', alignItems: 'center', width: '100%', padding: '10px', marginLeft: '50px' }}>
-                                <div style={{ background: 'white', borderRadius: '15px', textAlign: 'center', height: '55px', width: '1101px', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)' }}>
-                                    <Typography variant="h4" style={{ fontFamily: "Roboto Condensed", fontSize: '35px', color: '#332D2D', justifyContent: 'center', marginTop: '3px' }}
-                                    >Document to Flashcard Converter
-                                    </Typography>
-                                </div>
-                            </div>
-                            <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px' }}>
-                                <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
-                                    <IconButton color="black" style={{ fontSize: '45px' }}>
-                                        <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
-                                    </IconButton>
-                                </Box>
-                            </Box>
-                        </Toolbar>
-                    </AppBar>
+    <>
+    <div className="welcome-back-page">
+    <div className="lsbody">
+        <AppBar style={{background: 'none', boxShadow: 'none', padding: '10px', marginTop: '20px'}}>
+            <Toolbar>
+                <img src= "/logo.png" alt="App Logo" style={{width: 100, marginLeft: '50px'}}/>
+                <Typography variant="h3" style={{fontFamily: 'Poppin, sans-serif', fontWeight: '600', fontSize: '40px',color: '#B18A00'}}
+                >AcadZen
+                </Typography>
+                <div style={{ display: 'flex', alignItems: 'center', width: '100%', padding: '10px', marginLeft: '50px'}}>
+                    <div style={{ background: 'white', borderRadius: '15px', textAlign: 'center', height: '55px', width: '1101px', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}>
+                        <Typography variant="h4" style={{ fontFamily: "Roboto Condensed", fontSize: '35px',color: '#332D2D', textAlign: 'center' }}
+                        >Document to Flashcard Converter
+                        </Typography>
+                    </div>
+                </div>
+                <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px'}}>
+                    <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px'}}>
+                        <IconButton color="black" style={{ fontSize: '45px'}}>
+                        <HomeIcon style={{ fontSize: '80%', width: '100%'}} />
+                        </IconButton>
+                    </Box>
+                </Box>
+            </Toolbar>
+        </AppBar>
 
                     <div className="upload-document-content">
 
