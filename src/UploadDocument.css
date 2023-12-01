@@ -7,7 +7,7 @@
   background-repeat:repeat;
   height: 100vh;
   width: 100%;
-  position: fixed;
+  /* position: fixed; */
 }  
 
 .lsbody::before {
@@ -64,10 +64,95 @@
     margin-left: 30px;
     margin-top: 90px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
-    border: 6px dashed #A58585,
+  }
+
+  .fileComponents {
+    background: white;
+    width: 640px;
+    height: 80px;
+    border-radius: 10px;
+    margin: 0 auto 30px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+  }
+
+  .uploadedFilePanel {
+    padding: 20px;
+    width: 95%;
+    height: 540px;
+    overflow-y: auto;
+
+  }
+
+  .file-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 20px;
+  }
+  
+  /* Style for IconButton */
+  .file-actions button {
+    padding: 8px;
+    background-color: #FAC712;
+    color: #332D2D;
+    border-radius: 10%;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #D8AC00;
+    }
   }
   
   /* Example of a media query for small screens */
 @media (max-width: 768px) {
     /* Your styles for small screens here */
   }
+
+  /* UploadDocument.css */
+
+/* ... (previous styles) */
+
+.confirmation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FCF7EB;
+  border-radius: 15px;
+  padding: 20px;
+  width: 880px;
+  height: 250px;
+  max-width: 80%;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+}
+
+.confirmation-modal p {
+  font-size: 22px;
+  text-align: left;
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  margin: 10px;
+}
+
+.confirmation-modal button {
+  color: #332D2D;
+  padding: 10px 20px;
+  margin-right: 120px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.confirmation-modal button:last-child {
+  margin-right: 0;
+}
