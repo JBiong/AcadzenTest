@@ -14,6 +14,8 @@ import axios from "axios";
 const Dashboard = () => {
   const location = useLocation();
 
+  const [userData, setUserData] = useState([]);
+
   const [overviewClicked, setOverviewClicked] = useState(false);
   const [documentClicked, setDocumentClicked] = useState(false);
   const [dreamboardClicked, setDreamboardClicked] = useState(false);
@@ -24,8 +26,6 @@ const Dashboard = () => {
 
   const [enteredUsername, setEnteredUsername] = useState(""); // Use the entered username
   const [userName, setUserName] = useState(""); // Set a default value
-
-  
 
   useEffect(() => {
     // Check if the current location is /dashboard and set the Overview button state accordingly
@@ -48,7 +48,46 @@ const Dashboard = () => {
     setUserName(storedUsername || "Guest");
     console.log(storedUsername);
     // setUserName(newEnteredUsername || "Guest");
+
+    axios.get('http://localhost:8080/api/user/getAllUser')
+    .then(response => {
+      setUserData(response.data);
+    })
+    .catch(error => {
+      console.error('There was an error retrieving the user data!', error);
+    });
   }, [location.pathname, location.state?.enteredUsername]);
+
+  const convertToCSV = (data) => {
+
+    if (!data || data.length === 0) {
+      return '';
+    }
+
+    const csvRows = [];
+    const headers = Object.keys(data[0]);
+    csvRows.push(headers.join(','));
+  
+    for (const row of data) {
+      const values = headers.map(header => {
+        const escaped = (''+row[header]).replace(/"/g, '\\"');
+        return `"${escaped}"`;
+      });
+      csvRows.push(values.join(','));
+    }
+  
+    return csvRows.join('\n');
+  };
+  
+  const csvData = convertToCSV(userData);
+
+  const downloadLink = document.createElement('a');
+  downloadLink.href = `data:text/csv;charset=utf-8,${encodeURI(csvData)}`;
+  downloadLink.download = 'userData.csv';
+
+  const handleDownload = () => {
+    downloadLink.click();
+  };
 
   const handleButtonClick = (button) => {
     switch (button) {
@@ -263,11 +302,18 @@ const Dashboard = () => {
             <Typography variant="h3" style={{ fontWeight: 'bold' }}>
               {userName}
             </Typography>
+            
           </div>
         </Toolbar>
         <div className="quizact">
           <h3>Recent Quiz Activity</h3>
           <div className="insidequizdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}></div>
+          <div className="dluserinfodiv"><Button 
+          color="inherit"
+          type="submit"
+          variant="contained"
+          style={{ fontSize:'12px', width: '200px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px', marginTop:'5px' }}
+          onClick={handleDownload}>Download User Data</Button></div>
         </div>
         <div className="recentdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
           <div className="uploadstatus" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>

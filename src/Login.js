@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Grid, TextField, Toolbar, Typography } from "@mui/material";
+import { Button, Grid, TextField, Toolbar, Typography, Dialog, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import Dashboard from "./Dashboard";
 import "./login.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -14,6 +14,40 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isAccountCreated, setIsAccountCreated] = useState(false); // New state to track account creation status
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+  const loginUser = (username, password) => {
+    fetch(`http://localhost:8080/api/user/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.is_deleted === 1) {
+          // The user is deleted, so login fails
+          console.error('This account has been deleted.');
+        } else {
+          // The user is not deleted, so login succeeds
+          // Handle successful login here. For example, you can redirect the user to the dashboard.
+        }
+      })
+      .catch((error) => console.error('Error:', error));
+  };  
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -71,6 +105,9 @@ const Login = () => {
     if (!password.match(passwordRegex)) {
       // Password doesn't meet the criteria
       console.error("Password does not meet the requirements");
+
+      alert("Password does not meet the requirements. It must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long.");
+
       // You can display an error message to the user or use a state to show a validation message
       console.log("Password:", password);
       console.log("Is valid password:", password.match(passwordRegex));
@@ -251,20 +288,39 @@ const Login = () => {
             <div className="button-container">
               <Grid container spacing={0} justifyContent="center">
                 <Grid item xs={6}>
-                  <Button
-                    fullWidth
-                    type="submit"
-                    variant="contained"
-                    style={{
-                      width: "250px",
-                      borderRadius: "10px",
-                      backgroundColor: "#FAC712",
-                      color: "black",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Create Account
-                  </Button>
+                <Button
+                  fullWidth
+                  
+                  variant="contained"
+                  style={{
+                    width: "250px",
+                    borderRadius: "10px",
+                    backgroundColor: "#FAC712",
+                    color: "black",
+                    fontWeight: "bold",
+                  }}
+                  onClick={handleClickOpen}
+                >
+                  Create Account
+                </Button>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      Are you sure you want to create this account?
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose} style={{backgroundColor:'pink', color:'black'}}>Cancel</Button>
+                    <Button onClick={(event) => { handleSignup(event); handleClose(); }} style={{backgroundColor:'lightgreen', color:'black'}} autoFocus>
+                      Confirm
+                    </Button>
+                  </DialogActions>
+                </Dialog>
                 </Grid>
               </Grid>
             </div>
