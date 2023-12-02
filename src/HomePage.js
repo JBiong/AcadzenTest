@@ -20,6 +20,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LanguageIcon from '@mui/icons-material/Language';
 import ProfileSettings from './ProfileSettings';
+import FlashcardManagement from './FlashcardManagement';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -60,6 +61,8 @@ export default function HomePage() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/learningsession' element={<LearningSession />} />
                     <Route path='/uploaddocument' element={<UploadDocument />} />
+                    <Route path='/flashcardsmgt' element={<FlashcardManagement />} />
+                    <Route path='/learningsession' element={<LearningSession/>} />
                     <Route path='/aboutus' element={<AboutUs />} />
                     <Route path='/aboutacadzen' element={<AboutAcadZen />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />

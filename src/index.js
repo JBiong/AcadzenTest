@@ -8,8 +8,11 @@ import HomePage from './HomePage';
 import Dashboard from './Dashboard';
 import UploadDocument from './UploadDocument';
 import LearningSession from './LearningSession';
+//import FlashcardProgress from .'FlashcardProgress';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
+import FlashcardManagement from './FlahscardProgress';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,8 +20,9 @@ root.render(
     {/* <App /> */}
     {/* <HomePage/> */}
     {/* <Dashboard/> */}
-    <UploadDocument/>
-    {/* <LearningSession/> */}
+    {/* <UploadDocument/> */}
+    {/* <FlashcardProgress/> */}
+    <LearningSession/>
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
   </React.StrictMode>

@@ -10,20 +10,19 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'; 
+import { Link } from "react-router-dom";
 
 function UploadDocument() {
     const fileInputRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [newFile, setNewFile] = useState(null);
-    const [showConfirmation, setShowConfirmation] = useState(false);
-    const [confirmationCallback, setConfirmationCallback] = useState(null);
-    const [documentToDelete, setDocumentToDelete] = useState(null);
+    const userno = Cookies.get('userno');
 
     // Fetch uploaded files from the backend when the component mounts
     const fetchUploadedFiles = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/document/files');
+                const response = await fetch(`http://localhost:8080/api/document/files`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch uploaded files.');
                 }
@@ -382,9 +381,11 @@ function UploadDocument() {
                             </div>
                             <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px' }}>
                                 <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
-                                    <IconButton color="black" style={{ fontSize: '45px' }}>
-                                        <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
-                                    </IconButton>
+                                    <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                                        <IconButton color="black" style={{ fontSize: '45px' }}>
+                                            <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
+                                        </IconButton>
+                                    </Link>
                                 </Box>
                             </Box>
                         </Toolbar>
@@ -491,6 +492,13 @@ function UploadDocument() {
                                     Upload Document
                                 </Typography>
                             </Button>
+                            <Link to="/flashcardsmgt" style={{ textDecoration: 'none' }}>
+                            <Button style={{ background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px', marginTop: '150px', marginLeft: '10px' }}>
+                                <Typography style={{ fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none' }}>
+                                    FlashCards
+                                </Typography>
+                            </Button>
+                            </Link>
                         </div>
 
                         {/* Right Panel for Displaying Uploaded Files */}
