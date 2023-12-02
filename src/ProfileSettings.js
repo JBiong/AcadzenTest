@@ -1,6 +1,6 @@
 // Profile.js
 import React, { useEffect, useState } from "react";
-import { Box, Button, MenuItem, Select, TextField, TextareaAutosize, Toolbar, Typography } from "@mui/material";
+import { Box, Button, MenuItem, Select, TextField, TextareaAutosize, Toolbar, Typography, Dialog, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import "./Profile.css";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import GradingIcon from '@mui/icons-material/Grading';
@@ -28,6 +28,8 @@ const ProfileSettings = () => {
   const [pricingClicked, setPricingClicked] = useState(false);
   const [settingClicked, setSettingClicked] = useState(false);
   const [contactUsClicked, setContactUsClicked] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
 
   const userno = localStorage.getItem('userno');
   const npassword = localStorage.getItem('password');
@@ -133,6 +135,22 @@ const ProfileSettings = () => {
     document.getElementById("fileInput").click();
   };
 
+  const handleDeleteDialogOpen = () => {
+    setOpenDeleteDialog(true);
+  };
+  
+  const handleDeleteDialogClose = () => {
+    setOpenDeleteDialog(false);
+  };  
+
+  const handleUpdateDialogOpen = () => {
+    setOpenUpdateDialog(true);
+  };
+
+  const handleUpdateDialogClose = () => {
+    setOpenUpdateDialog(false);
+  };
+
   const handleButtonClick = (button) => {
     switch (button) {
       case 'overview':
@@ -216,121 +234,121 @@ const ProfileSettings = () => {
             <Typography style={{ fontWeight: 'bold', color: '#8C7111', fontSize: '40px' }}>AcadZen</Typography>
           </Toolbar>
         </div>
-        <Toolbar>
-        <Box display="flex" flexDirection="column" alignItems="center"justifyContent="flex-start" style={{ height: '50vh', marginTop:'50px' }}>
-        <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-          <Button
+          <Toolbar>
+          <Box display="flex" flexDirection="column" alignItems="center"justifyContent="flex-start" style={{ height: '50vh', marginTop:'50px' }}>
+          <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+            <Button
+              color="inherit"
+              type="submit"
+              variant={overviewClicked ? "contained" : "outlined"}
+              style={{
+                fontSize: '15px',
+                border:'none',
+                width: '250px',
+                borderRadius: '10px',
+                backgroundColor: overviewClicked ? 'white' : '#FAC712',
+                color: overviewClicked ? '#8C7111' : 'black',
+                fontWeight: 'bold',
+                height: '40px',marginBottom: '30px'
+              }}
+              onClick={() => handleButtonClick('overview')}
+            ><GradingIcon style={{marginRight:'10px'}}/> Overview</Button>
+          </Link>
+          <Link to="/uploaddocument" style={{ textDecoration: 'none' }}>
+            <Button
             color="inherit"
             type="submit"
-            variant={overviewClicked ? "contained" : "outlined"}
+            variant={documentClicked ? "contained" : "outlined"}
+            style={{
+              fontSize: '13px',
+              border:'none',
+              width: '270px',
+              borderRadius: '10px',
+              backgroundColor: documentClicked ? 'white' : '#FAC712',
+              color: documentClicked ? '#8C7111' : 'black',
+              fontWeight: 'bold',
+              height: '40px',marginBottom: '30px'
+            }}
+            onClick={() => handleButtonClick('document')}
+          ><PictureAsPdfIcon style={{marginRight:'10px'}}/> Document to Flashcards</Button>
+          </Link>
+            <Button
+            color="inherit"
+            type="submit"
+            variant={dreamboardClicked ? "contained" : "outlined"}
             style={{
               fontSize: '15px',
               border:'none',
               width: '250px',
               borderRadius: '10px',
-              backgroundColor: overviewClicked ? 'white' : '#FAC712',
-              color: overviewClicked ? '#8C7111' : 'black',
+              backgroundColor: dreamboardClicked ? 'white' : '#FAC712',
+              color: dreamboardClicked ? '#8C7111' : 'black',
               fontWeight: 'bold',
               height: '40px',marginBottom: '30px'
             }}
-            onClick={() => handleButtonClick('overview')}
-          ><GradingIcon style={{marginRight:'10px'}}/> Overview</Button>
-        </Link>
-        <Link to="/uploaddocument" style={{ textDecoration: 'none' }}>
-          <Button
-          color="inherit"
-          type="submit"
-          variant={documentClicked ? "contained" : "outlined"}
-          style={{
-            fontSize: '13px',
-            border:'none',
-            width: '270px',
-            borderRadius: '10px',
-            backgroundColor: documentClicked ? 'white' : '#FAC712',
-            color: documentClicked ? '#8C7111' : 'black',
-            fontWeight: 'bold',
-            height: '40px',marginBottom: '30px'
-          }}
-          onClick={() => handleButtonClick('document')}
-        ><PictureAsPdfIcon style={{marginRight:'10px'}}/> Document to Flashcards</Button>
-        </Link>
-          <Button
-          color="inherit"
-          type="submit"
-          variant={dreamboardClicked ? "contained" : "outlined"}
-          style={{
-            fontSize: '15px',
-            border:'none',
-            width: '250px',
-            borderRadius: '10px',
-            backgroundColor: dreamboardClicked ? 'white' : '#FAC712',
-            color: dreamboardClicked ? '#8C7111' : 'black',
-            fontWeight: 'bold',
-            height: '40px',marginBottom: '30px'
-          }}
-          onClick={() => handleButtonClick('dreamboard')}
-        ><CloudQueueIcon style={{marginRight:'10px'}}/> Dreamboard</Button>
+            onClick={() => handleButtonClick('dreamboard')}
+          ><CloudQueueIcon style={{marginRight:'10px'}}/> Dreamboard</Button>
+              <Button
+            color="inherit"
+            type="submit"
+            variant={mentalHealthClicked ? "contained" : "outlined"}
+            style={{
+              fontSize: '13px',
+              border:'none',
+              width: '250px',
+              borderRadius: '10px',
+              backgroundColor: mentalHealthClicked ? 'white' : '#FAC712',
+              color: mentalHealthClicked ? '#8C7111' : 'black',
+              fontWeight: 'bold',
+              height: '40px',marginBottom: '30px'
+            }}
+            onClick={() => handleButtonClick('mentalHealth')}
+          ><SpaIcon style={{marginRight:'10px'}}/> Mental Health Support</Button>
+              <Button
+            color="inherit"
+            type="submit"
+            variant={pricingClicked ? "contained" : "outlined"}
+            style={{
+              fontSize: '15px',
+              border:'none',
+              width: '250px',
+              borderRadius: '10px',
+              backgroundColor: pricingClicked ? 'white' : '#FAC712',
+              color: pricingClicked ? '#8C7111' : 'black',
+              fontWeight: 'bold',
+              height: '40px',marginBottom: '30px'
+            }}
+            onClick={() => handleButtonClick('pricing')}
+          ><MonetizationOnIcon style={{marginRight:'10px'}}/> Pricing</Button>
+            <Link to="/profilesettings" style={{ textDecoration: 'none' }}>
             <Button
-          color="inherit"
-          type="submit"
-          variant={mentalHealthClicked ? "contained" : "outlined"}
-          style={{
-            fontSize: '13px',
-            border:'none',
-            width: '250px',
-            borderRadius: '10px',
-            backgroundColor: mentalHealthClicked ? 'white' : '#FAC712',
-            color: mentalHealthClicked ? '#8C7111' : 'black',
-            fontWeight: 'bold',
-            height: '40px',marginBottom: '30px'
-          }}
-          onClick={() => handleButtonClick('mentalHealth')}
-        ><SpaIcon style={{marginRight:'10px'}}/> Mental Health Support</Button>
-            <Button
-          color="inherit"
-          type="submit"
-          variant={pricingClicked ? "contained" : "outlined"}
-          style={{
-            fontSize: '15px',
-            border:'none',
-            width: '250px',
-            borderRadius: '10px',
-            backgroundColor: pricingClicked ? 'white' : '#FAC712',
-            color: pricingClicked ? '#8C7111' : 'black',
-            fontWeight: 'bold',
-            height: '40px',marginBottom: '30px'
-          }}
-          onClick={() => handleButtonClick('pricing')}
-        ><MonetizationOnIcon style={{marginRight:'10px'}}/> Pricing</Button>
-          <Link to="/profilesettings" style={{ textDecoration: 'none' }}>
+            color="inherit"
+            type="submit"
+            variant={settingClicked ? "contained" : "outlined"}
+            style={{
+              fontSize: '15px',
+              border:'none',
+              width: '250px',
+              borderRadius: '10px',
+              backgroundColor: settingClicked ? 'white' : '#FAC712',
+              color: settingClicked ? '#8C7111' : 'black',
+              fontWeight: 'bold',
+              height: '40px',marginBottom: '30px'
+            }}
+            onClick={() => handleButtonClick('setting')}
+          ><SettingsIcon style={{marginRight:'10px'}}/> Setting</Button>
+          </Link>
+          </Box>
+        </Toolbar>
+        <div className="contactusdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <p style={{ marginBottom: '20px', width: '200px' }}>Encountering problems with our service? Reach out to our customer support team for assistance.</p>
           <Button
-          color="inherit"
-          type="submit"
-          variant={settingClicked ? "contained" : "outlined"}
-          style={{
-            fontSize: '15px',
-            border:'none',
-            width: '250px',
-            borderRadius: '10px',
-            backgroundColor: settingClicked ? 'white' : '#FAC712',
-            color: settingClicked ? '#8C7111' : 'black',
-            fontWeight: 'bold',
-            height: '40px',marginBottom: '30px'
-          }}
-          onClick={() => handleButtonClick('setting')}
-        ><SettingsIcon style={{marginRight:'10px'}}/> Setting</Button>
-        </Link>
-        </Box>
-      </Toolbar>
-      <div className="contactusdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <p style={{ marginBottom: '20px', width: '200px' }}>Encountering problems with our service? Reach out to our customer support team for assistance.</p>
-        <Button
-          color="inherit"
-          type="submit"
-          variant="contained"
-          style={{ fontSize:'15px', width: '250px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px' }}
-        > Contact us</Button>
-      </div>
+            color="inherit"
+            type="submit"
+            variant="contained"
+            style={{ fontSize:'15px', width: '250px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px' }}
+          > Contact us</Button>
+        </div>
       </div>
       <div className="namecontainer">
       <div className="logoutdiv" style={{display:'flex', justifyContent:'center', alignItems: 'flex-start'}}>
@@ -485,18 +503,65 @@ const ProfileSettings = () => {
                   color: '#FAC712',
                   fontWeight: 'bold',
                   height: '40px', marginBottom: '30px'}}
-                onClick={deleteUser}
+                onClick={handleDeleteDialogOpen}
               >
                 Delete Account
               </Button>
+              <Dialog
+                open={openDeleteDialog}
+                onClose={handleDeleteDialogClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Are you sure you want to delete this account? This action cannot be undone.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleDeleteDialogClose} style={{backgroundColor:'pink', color:'black'}}>Cancel</Button>
+                  <Button onClick={() => { deleteUser(); handleDeleteDialogClose(); }} style={{backgroundColor:'lightgreen', color:'black'}} autoFocus>
+                    Confirm
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
             <div className="updating">
               <Button
-                style={{ backgroundColor: 'lightgreen', color: '#8C7111', width: '300px' }}
-                onClick={() => updateProfile(newUsername, enteredPassword, newEmail)}
+                style={{
+                  // marginTop:'25px',
+                  // marginLeft:'700px',
+                  fontSize: '15px',
+                  border:'none',
+                  width: '300px',
+                  borderRadius: '10px',
+                  backgroundColor: '#FAC712',
+                  color: 'black',
+                  fontWeight: 'bold',
+                  height: '40px', marginBottom: '30px'}}
+                onClick={handleUpdateDialogOpen}
               >
                 Save Changes
               </Button>
+              <Dialog
+                open={openUpdateDialog}
+                onClose={handleUpdateDialogClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Are you sure you want to save these changes?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleUpdateDialogClose} style={{backgroundColor:'pink', color:'black'}}>Cancel</Button>
+                  <Button onClick={() => { updateProfile(newUsername, enteredPassword, newEmail); handleUpdateDialogClose(); }} style={{backgroundColor:'lightgreen', color:'black'}} autoFocus>
+                    Confirm
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
             </div>
         </div>
         
