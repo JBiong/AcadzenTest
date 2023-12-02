@@ -1,4 +1,4 @@
-.wrapper{
+/* .wrapper{
     margin-bottom: auto 0px; 
     padding: 0; 
     background-image: url('/public/crystalbackground.png');
@@ -6,11 +6,11 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
-  }
+  } */
   
-  button {
+  /* button {
     cursor: pointer;
-  }
+  } */
   /* button:hover {
     background-color: lightgrey; 
   } */
@@ -23,7 +23,7 @@
       margin-left: 150px;
   }
   */
-  .header{
+  /* .header{
     display:flex;
     align-items: center;
     width: 1019px;
@@ -91,9 +91,9 @@
     border-radius: 5px;
     padding: 10px;
     text-align: center;
-  }
+  } */
   
-  .selected-flashcard-deck{
+  /* .selected-flashcard-deck{
     align-items: center;
     margin-left: 280px;
     margin-top: 10px;
@@ -102,10 +102,10 @@
     width:1019px;
     height:443px;
     padding: 10px;
-    overflow: auto; /* Enable scrolling */
+    overflow: auto; Enable scrolling
         border: 1px solid #ccc;
-  }
-  .flashcard-deck-title {
+  } */
+  /* .flashcard-deck-title {
     font-weight: bold;
     text-align: center;
     color: #332d2d;
@@ -188,4 +188,4 @@
     align-items: center;
     width: 1019px;
     height:140px;
-  }
+  } */
