@@ -11,14 +11,15 @@ import LearningSession from './LearningSession';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <HomePage/> */}
     {/* <Dashboard/> */}
-    <UploadDocument/>
-    {/* <LearningSession/> */}
+    {/* <UploadDocument/> */}
+    <LearningSession/>
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
   </React.StrictMode>
