@@ -16,10 +16,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    {/* <HomePage/> */}
+    <HomePage/>
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
+<<<<<<< HEAD
     <LearningSession/>
+=======
+    {/* <LearningSession/> */}
+>>>>>>> d03420a2d61eb4588510b72b7bc8a265f0ff268f
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
   </React.StrictMode>
