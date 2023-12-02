@@ -9,6 +9,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'; 
+import { Link } from "react-router-dom";
 
 function UploadDocument() {
     const fileInputRef = useRef(null);
@@ -327,9 +328,11 @@ function UploadDocument() {
                             </div>
                             <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px' }}>
                                 <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
-                                    <IconButton color="black" style={{ fontSize: '45px' }}>
-                                        <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
-                                    </IconButton>
+                                    <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                                        <IconButton color="black" style={{ fontSize: '45px' }}>
+                                            <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
+                                        </IconButton>
+                                    </Link>
                                 </Box>
                             </Box>
                         </Toolbar>
@@ -436,6 +439,13 @@ function UploadDocument() {
                                     Upload Document
                                 </Typography>
                             </Button>
+                            <Link to="/flashcardsmgt" style={{ textDecoration: 'none' }}>
+                            <Button style={{ background: '#FAC712', width: '230px', height: '45px', borderRadius: '10px', marginTop: '150px', marginLeft: '10px' }}>
+                                <Typography style={{ fontSize: '20px', fontFamily: 'Nunito Sans, sans-serif', fontWeight: 'bold', color: '#332D2D', textTransform: 'none' }}>
+                                    FlashCards
+                                </Typography>
+                            </Button>
+                            </Link>
                         </div>
 
                         {/* Right Panel for Displaying Uploaded Files */}

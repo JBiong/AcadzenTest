@@ -9,7 +9,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./flashcardmgt.css";
-import { Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, IconButton, DialogContentText } from "@mui/material";
+import { Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, IconButton, DialogContentText, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
 export default function FlashcardManagement(){
@@ -200,14 +201,18 @@ const [isFlashcardUpdatedConfirmationOpen, setFlashcardUpdatedConfirmationOpen] 
   };
 
     return(
+      <>
+      <div className="welcome-back-page">
         <div className="wrapper">
                 <div className="decksnav">
                     <div className="decks-list">
                         <div style={{display:'flex', justifyContent: 'center'}}>
-                                <img src= "/logo.png" alt="App Logo" style={{width: 50}}/>
-                            <Typography variant="h3" style={{fontFamily: 'Poppin, sans-serif', fontWeight: '600', fontSize: '30px',color: '#B18A00'}}
-                            >AcadZen
-                            </Typography>
+                        <img
+                          src="logo.png"
+                          alt="AcadZen Logo"
+                          style={{ width: '80px' }}
+                        />
+                        <Typography style={{ fontWeight: 'bold', color: '#8C7111', fontSize: '40px' }}>AcadZen</Typography>
                         </div>
                         <div className="decks-heading">Decks</div>
                         {/*
@@ -254,15 +259,22 @@ const [isFlashcardUpdatedConfirmationOpen, setFlashcardUpdatedConfirmationOpen] 
                 </div>
 
                 <div className="header">
-                <div className="heading">Document to Flashcards Converter</div>
-
-                <div style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginLeft:'40px'}}>
-                    <div style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px'}}>
-                        <IconButton color="black" style={{ fontSize: '45px'}}>
-                        <HomeIcon style={{ fontSize: '80%', width: '100%'}} />
-                        </IconButton>
-                    </div>
-                </div>
+                <div style={{ display: 'flex', alignItems: 'center', width: '100%', padding: '10px', marginLeft: '50px' }}>
+                                <div style={{ marginLeft:'100px', background: 'white', borderRadius: '15px', textAlign: 'center', height: '55px', width: '1250px', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)' }}>
+                                    <Typography variant="h4" style={{ fontFamily: "Roboto Condensed", fontSize: '35px', color: '#332D2D', justifyContent: 'center', marginTop: '3px' }}
+                                    >Document to Flashcard Converter
+                                    </Typography>
+                                </div>
+                            </div>
+                            <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px' }}>
+                                <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
+                                    <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                                        <IconButton color="black" style={{ fontSize: '45px' }}>
+                                            <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
+                                        </IconButton>
+                                    </Link>
+                                </Box>
+                            </Box>
                 </div>
 
                 
@@ -465,5 +477,7 @@ const [isFlashcardUpdatedConfirmationOpen, setFlashcardUpdatedConfirmationOpen] 
                 </div>
               </div>
         </div>
+      </div>
+      </>
     )
 }
