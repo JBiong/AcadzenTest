@@ -16,11 +16,12 @@ function UploadDocument() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [newFile, setNewFile] = useState(null);
+    const userno = Cookies.get('userno');
 
         // Fetch uploaded files from the backend when the component mounts
         const fetchUploadedFiles = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/document/files');
+                const response = await fetch(`http://localhost:8080/api/document/files`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch uploaded files.');
                 }

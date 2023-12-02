@@ -89,20 +89,23 @@ function LearningSession() {
           <Typography variant="h4" style={{ textAlign: 'center' }}>Rizal's Lover</Typography>
           <div className="inner-panel" style={{ position: 'relative' }}>
             {isMemorized && (
-                <div className="memorized-star">
+              <div className="memorized-star">
                 <img
-                    src="/star.png"
-                    alt="Star"
-                    style={{
-                        width: '80px', // Increase the width for a larger star
-                        position: 'absolute',
-                        top: '10px',
-                        right: '10px'
-                    }}
-                    />
-                </div>
+                  src="/star.png"
+                  alt="Star"
+                  style={{
+                    width: '80px', // Increase the width for a larger star
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px'
+                  }}
+                />
+              </div>
             )}
-            <div className={`flashcards ${isFlipped ? 'flipped' : ''}`} onClick={showAnswer}>
+            <div
+              className={`flashcard-container ${isFlipped ? 'flipped' : ''}`}
+              onClick={showAnswer}
+            >
               <div className="front">
                 <Typography variant="h4">{currentFlashcard.front}</Typography>
               </div>
@@ -111,9 +114,8 @@ function LearningSession() {
               </div>
             </div>
           </div>
-                
-                <span className="indicator">{`${currentNumber}/20`}</span>
-            </div>
+          <span className="indicator">{`${currentNumber}/20`}</span>
+        </div>
 
             <div className="progress-bar">
                     <div className="progress" style={{ width: calculateProgressWidth() }}></div>
@@ -142,7 +144,6 @@ function LearningSession() {
                     Marked as Memorized
                 </Button>
             </div>
-        
     </div>
 
     </>

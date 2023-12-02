@@ -62,6 +62,7 @@ export default function HomePage() {
                     <Route path='/learningsession' element={<LearningSession />} />
                     <Route path='/uploaddocument' element={<UploadDocument />} />
                     <Route path='/flashcardsmgt' element={<FlashcardManagement />} />
+                    <Route path='/learningsession' element={<LearningSession/>} />
                     <Route path='/aboutus' element={<AboutUs />} />
                     <Route path='/aboutacadzen' element={<AboutAcadZen />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />

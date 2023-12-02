@@ -451,7 +451,9 @@ const [isFlashcardUpdatedConfirmationOpen, setFlashcardUpdatedConfirmationOpen] 
                     <button className="btnYellow" >Save Changes</button>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent:'center' }}>
+                      <Link to='/learningsession' >
                     <button className="btnWhite">Start Learning Session</button>
+                    </Link>
                     <button className="btnWhite" onClick={openDeletePopup} disabled={clickedDeck === null}>Delete Deck</button>
                     <Dialog open={isDeletePopupOpen} onClose={closeDeletePopup}>
                       <DialogTitle>Delete Deck</DialogTitle>
