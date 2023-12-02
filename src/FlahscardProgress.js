@@ -9,7 +9,7 @@ import "./FlashcardProgress.css";
 import { Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, IconButton, DialogContentText } from "@mui/material";
 
 
-export default function FlashcardManagement(){
+export default function FlashcardProgress(){
     const [clickedDeck, setClickedDeck] = useState(null);
     const [isCreatePopupOpen, setCreatePopupOpen] = useState(false);
     const [isUpdatePopupOpen, setUpdatePopupOpen] = useState(false);

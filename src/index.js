@@ -8,22 +8,21 @@ import HomePage from './HomePage';
 import Dashboard from './Dashboard';
 import UploadDocument from './UploadDocument';
 import LearningSession from './LearningSession';
+//import FlashcardProgress from .'FlashcardProgress';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
+import FlashcardManagement from './FlahscardProgress';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <HomePage/>
+    {/* <HomePage/> */}
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
-<<<<<<< HEAD
+    {/* <FlashcardProgress/> */}
     <LearningSession/>
-=======
-    {/* <LearningSession/> */}
->>>>>>> d03420a2d61eb4588510b72b7bc8a265f0ff268f
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
   </React.StrictMode>
