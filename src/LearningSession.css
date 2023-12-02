@@ -59,10 +59,9 @@
     padding: 30px;
     width: 60%;;
     height: 478px;
-    margin-left: 50px;
-    margin-top: 90px;
     height: 378px;
     margin: 50px auto;
+    margin-top: 200px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     text-align: center;
   }
@@ -167,12 +166,16 @@
       /* Styles for back side */
       z-index: 1; /* Keep back hidden initially */
   }
+
+  .flashcard {
+  background-color: none;
+  }
   
-  .flashcard.flipped .front {
+  .flashcards.flipped .front {
       transform: rotateY(180deg);
   }
   
-  .flashcard.flipped .back {
+  .flashcards.flipped .back {
       transform: rotateY(0deg);
   }
 

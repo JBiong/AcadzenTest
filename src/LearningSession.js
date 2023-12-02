@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography, IconButton, Box, Button } from "@mui/mater
 import HomeIcon from "@mui/icons-material/Home";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Link } from "react-router-dom";
 
 function LearningSession() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -74,9 +75,11 @@ function LearningSession() {
                 </div>
                 <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px'}}>
                     <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px'}}>
+                      <Link to='/dashboard' style={{textDecoration:'none'}}>
                         <IconButton color="black" style={{ fontSize: '45px'}}>
-                        <HomeIcon style={{ fontSize: '80%', width: '100%'}} />
+                          <HomeIcon style={{ fontSize: '80%', width: '100%'}} />
                         </IconButton>
+                      </Link>
                     </Box>
                 </Box>
             </Toolbar>
@@ -99,7 +102,7 @@ function LearningSession() {
                     />
                 </div>
             )}
-            <div className={`flashcard ${isFlipped ? 'flipped' : ''}`} onClick={showAnswer}>
+            <div className={`flashcards ${isFlipped ? 'flipped' : ''}`} onClick={showAnswer}>
               <div className="front">
                 <Typography variant="h4">{currentFlashcard.front}</Typography>
               </div>
@@ -139,13 +142,7 @@ function LearningSession() {
                     Marked as Memorized
                 </Button>
             </div>
-        {/* Right Panel for Displaying Uploaded Files */}
-        <div className="right-panel">
-        <Typography variant="h4" style={{ fontFamily: 'Roboto Condensed', fontSize: '30px', color: '#332D2D', textAlign: 'left', margin: '10px' }}>
-            Uploaded Documents
-        </Typography>
-        {/* Add your file display components here */}
-        </div>
+        
     </div>
 
     </>

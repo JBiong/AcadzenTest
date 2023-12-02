@@ -11,7 +11,6 @@ import LearningSession from './LearningSession';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -19,11 +18,7 @@ root.render(
     <HomePage/>
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
-<<<<<<< HEAD
-    <LearningSession/>
-=======
     {/* <LearningSession/> */}
->>>>>>> d03420a2d61eb4588510b72b7bc8a265f0ff268f
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
   </React.StrictMode>
