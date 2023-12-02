@@ -98,15 +98,6 @@
     }
   }
   
-  /* Example of a media query for small screens */
-@media (max-width: 768px) {
-    /* Your styles for small screens here */
-  }
-
-  /* UploadDocument.css */
-
-/* ... (previous styles) */
-
 .confirmation-modal {
   position: fixed;
   top: 50%;
@@ -149,3 +140,17 @@
 .confirmation-modal button:last-child {
   margin-right: 0;
 }
+
+
+.inputContainer {
+  background-color: #FFF9C4;
+  padding: 16px;
+  margin-bottom: 5px;
+  box-shadow: 0 8px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+.inputField {
+  margin-right: 10px;
+}
+
+
