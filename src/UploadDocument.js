@@ -10,19 +10,22 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'; 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function UploadDocument() {
     const fileInputRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [newFile, setNewFile] = useState(null);
-    const userno = Cookies.get('userno');
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [confirmationCallback, setConfirmationCallback] = useState(null);
+    const [documentToDelete, setDocumentToDelete] = useState(null);
+    const userno = Cookies.get('userno')
 
     // Fetch uploaded files from the backend when the component mounts
     const fetchUploadedFiles = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/document/files`);
+                const response = await fetch('http://localhost:8080/api/document/files');
                 if (!response.ok) {
                     throw new Error('Failed to fetch uploaded files.');
                 }

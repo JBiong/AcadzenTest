@@ -11,20 +11,23 @@ import LearningSession from './LearningSession';
 //import FlashcardProgress from .'FlashcardProgress';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
-import FlashcardManagement from './FlahscardProgress';
+import FlashcardManagement from './FlashcardManagement';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    {/* <BrowserRouter> */}
     {/* <App /> */}
-    {/* <HomePage/> */}
+    <HomePage/>
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
-    {/* <FlashcardProgress/> */}
-    <LearningSession/>
+    {/* <FlashcardManagement/> */}
+    {/* <LearningSession/> */}
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
+    {/* </BrowserRouter> */}
   </React.StrictMode>
 );
 
