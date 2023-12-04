@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /* .wrapper{
     margin-bottom: auto 0px; 
     padding: 0; 
@@ -189,3 +190,144 @@
     width: 1019px;
     height:140px;
   } */
+=======
+/* FlashcardProgress.css */
+.container {
+  display: flex;
+  justify-content: space-between; /* To push the sidebar and content to opposite sides */
+  width: 1250px; /* Adjust the width of the container */
+  height: 500px; /* Set the desired height for the square */
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #FFD234;
+  padding: 20px;
+  margin-top: 150px;
+  margin-left: 50px;
+  width: 200px;
+  height: 100%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 10px ;
+  margin-top: 10px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #bababa;
+  border-radius: 10px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.content table {
+  width: 100%; /* Adjusted table width to occupy remaining space */
+  border-collapse: collapse;
+}
+
+.content-wrapper {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 20px;
+  height: 540px;
+  overflow: auto;
+  background-color: #fff; /* Set background color if needed */
+  margin-left: 20px; /* Add a margin to the left */
+  margin-top: 150px;
+  width: 100%;
+  border-radius: 7px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  /* Other styles for the content wrapper */
+}
+
+.last-reviewed {
+  text-align: right;
+}
+
+.selected {
+  background-color: #FFD234;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2  );
+  /* Other styles to highlight the selected item */
+}
+
+.navigation-decks {
+  background-color: white;
+  padding: 10px; /* Add padding as needed */
+  border-radius: 10px; /* Add border-radius for rounded corners */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+  height: 400px;
+}
+
+
+.content-inside {
+  background-color: #FFD234; /* Set the background color to yellow */
+  width: 100%; /* Make it take the full width of the content wrapper */
+  height: 415px; /* Make it take the full height of the content wrapper */
+  display: flex; /* Use flex to center the content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin-top: 2px;
+  border-radius: 7px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.content-wrapper table {
+  width: 100%; /* Set table width to occupy the entire content area */
+  border-collapse: collapse;
+}
+
+.content th,
+.content td {
+  border: 1px solid #000000;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #ffffff;
+}
+
+/* Adjust individual column widths */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 35%; /* Set width for the first column */
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 10%; /* Set width for the second column */
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 10%; /* Set width for the third column */
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 10%; /* Set width for the fourth column */
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 20%; /* Set width for the fifth column */
+}
+>>>>>>> Stashed changes
