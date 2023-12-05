@@ -10,13 +10,13 @@ import UploadDocument from './UploadDocument';
 import LearningSession from './LearningSession';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
-<<<<<<< Updated upstream
+
 import FlashcardManagement from './FlashcardManagement';
 import { BrowserRouter } from 'react-router-dom';
-=======
+
 import FlashcardProgress from './FlashcardProgress';
-import FlashcardManagement from './FlashcardManagement';
->>>>>>> Stashed changes
+// import FlashcardManagement from './FlashcardManagement';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,12 +27,10 @@ root.render(
     <HomePage/>
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
-<<<<<<< Updated upstream
     {/* <FlashcardManagement/> */}
     {/* <LearningSession/> */}
-=======
     {/* <FlashcardProgress/> */}
-    <LearningSession/>
+    {/* <LearningSession/> */}
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
     {/* </BrowserRouter> */}
