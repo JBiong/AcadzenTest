@@ -7,10 +7,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
 import SaveIcon from "@mui/icons-material/Save";
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'; 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function UploadDocument() {
     const fileInputRef = useRef(null);
@@ -54,16 +55,16 @@ function UploadDocument() {
             // Fetch uploaded files from the backend when the component mounts and when the page is refreshed
             fetchUploadedFiles();
         }, []);
-    useEffect(() => {
-        // Load uploaded files from localStorage when the component mounts
-        const storedFiles = JSON.parse(localStorage.getItem("uploadedFiles")) || [];
-        setUploadedFiles(storedFiles);
-    }, []);
+        useEffect(() => {
+            // Load uploaded files from localStorage when the component mounts
+            const storedFiles = JSON.parse(localStorage.getItem("uploadedFiles")) || [];
+            setUploadedFiles(storedFiles);
+        }, []);
 
-    // Save uploaded files to localStorage whenever the uploadedFiles state changes
-    useEffect(() => {
-        localStorage.setItem("uploadedFiles", JSON.stringify(uploadedFiles));
-    }, [uploadedFiles]);
+        // Save uploaded files to localStorage whenever the uploadedFiles state changes
+        useEffect(() => {
+            localStorage.setItem("uploadedFiles", JSON.stringify(uploadedFiles));
+        }, [uploadedFiles]);
 
 
     const handleBrowseClick = () => {
@@ -86,8 +87,7 @@ function UploadDocument() {
     
             setNewFile(file);
         }
-    };    
-    
+    };     
     
     const formatFileSize = (size) => {
         if (typeof size !== 'number') {
@@ -115,7 +115,7 @@ function UploadDocument() {
                     console.log(userno);
 
                     const formData = new FormData();
-                    formData.append('document', new Blob([JSON.stringify({ documentTitle: selectedFile.name, fileType: fileType, isDeleted: 0 })], { type: 'application/json' }));
+                    formData.append('document', new Blob([JSON.stringify({ documentTitle: selectedFile.name, fileType: fileType, isDeleted: 0, isDeleted: 0 })], { type: 'application/json' }));
                     formData.append('file', selectedFile);
     
                     const response = await fetch(`http://localhost:8080/api/document/upload/${userno}`, {
@@ -295,7 +295,17 @@ function UploadDocument() {
             });
         }
     };
-    
+
+    const handleFileReplaceChange = (e) => {
+        const file = e.target.files[0];
+        setReplacementFile(file);
+
+        // Display file info after selecting a replacement file
+        if (file) {
+            console.log("Replacement File Selected:", file.name);
+            console.log("File Size:", formatFileSize(file.size));
+        }
+    }; 
 
     const handleCancelEdit = () => {
     setEditIndex(null);
@@ -359,41 +369,35 @@ function UploadDocument() {
             console.log('Response Body:', responseBody);
       
             if (!response.ok) {
-              throw new Error('File update failed. Please try again.');
+                throw new Error('Failed to delete document. Please try again.');
             }
-      
-            const updatedFiles = uploadedFiles.map((file, i) => {
-                if (i === editIndex ) {
-                    return {
-                        documentID: documentID,
-                        documentTitle: newFileName || file.documentTitle,
-                        fileType: newFile ? getFileType(newFile.name) : file.fileType,
-                        fileSize: newFile ? formatFileSize(newFile.size) : file.fileSize,
-                    };
-                } else {
-                    return file;
-                }
+    
+            // Fetch the updated files after successful soft deletion
+            const updatedFiles = await fetchUploadedFiles();
+
+            setUploadedFiles(prevFiles => {
+            // Update the state using the functional form
+            const filteredFiles = updatedFiles && updatedFiles.filter(file => file.isDeleted !== 1);
+
+            if (filteredFiles) {
+                Cookies.set('uploadedFiles', JSON.stringify(filteredFiles));
+                localStorage.setItem("uploadedFiles", JSON.stringify(filteredFiles));
+            }
+        
+            return filteredFiles || prevFiles;  // Return prevFiles if filteredFiles is undefined
+
+        }); 
+    
+            toast.success('Document successfully deleted!', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 500,
             });
-      
-            setUploadedFiles(updatedFiles);
-            handleCancelEdit();
-      
-            toast.success('File successfully updated!', {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 500,
-            });
-          } else {
-            toast.error('Please provide a new name to update.', {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1000,
-            });
-          }
         } catch (error) {
-          console.error('Error in handleSaveEdit:', error);
-          toast.error(error.message, {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 1000,
-          });
+            console.error('Error in handleDeleteClick:', error);
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1000,
+            });
         }
       };     
 
@@ -721,19 +725,9 @@ function UploadDocument() {
                                 </div>
                                 
                             ))
-                            
                             ) : (
                             <p>No uploaded files available.</p>
                             )}
-                            {showConfirmation && (
-                                <div className="confirmation-modal">
-                                    <h1 style={{ margin: '10px 10px 20px 50px', fontWeight: 'bold', fontFamily: "Roboto", fontSize: "30px"}}>Delete?</h1>
-                                    <p style={{fontFamily: "Roboto", fontSize: "20px", marginRight: "20px"}}>Deleting this document will erase all data permanently <br /> Are you sure? This cannot be undone</p>
-                                    <button onClick={() => setShowConfirmation(false)}>Cancel</button>
-                                    <button style={{ background: '#FAC712' }} onClick={() => { confirmationCallback(); setShowConfirmation(false); }}>Confirm</button>
-                                </div>
-                                )}
-                            
                         </div>
                         </div>
                         
@@ -745,3 +739,71 @@ function UploadDocument() {
 }
 
 export default UploadDocument;
+
+
+
+{/* Confirmation Modal */}
+                        {/* {showConfirmation && (
+                            <div className="confirmation-modal">
+                                <h1 style={{ margin: '10px 10px 20px 50px', fontWeight: 'bold' }}>Kaya pa ang Project?</h1>
+                                <p>Kung di na kaya, Salig lang, laban lang then give up <br /> Dinasure? Awh Merry Christmas Yeeeheeey...</p>
+                                <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                                <button style={{ background: '#FAC712' }} onClick={() => { confirmationCallback(); setShowConfirmation(false); }}>Confirm</button>
+                            </div>
+                        )} */}
+
+                            // const handleFileChange = (e, index, documentID) => {
+    //     const file = e.target.files[0];
+    
+    //     if (file) {
+    //         setSelectedFile(file);
+    
+    //         const reader = new FileReader();
+    //         reader.onload = (event) => {
+    //             const contentArray = new Uint8Array(event.target.result);
+    //             // You can use contentArray if needed
+    //         };
+    //         reader.readAsArrayBuffer(file);
+    
+    //         setEditStates((prevStates) => {
+    //             const newStates = [...prevStates];
+    //             newStates[index] = {
+    //                 ...newStates[index],
+    //                 newFile: file,
+    //             };
+    //             return newStates;
+    //         });
+    //     }
+    // };
+
+    // const handleEditClick = (index) => {
+    //     setEditIndex(index);
+    //     setNewFileName(uploadedFiles[index].documentTitle);
+    //     setNewFile(null);
+    // };
+
+    // const handleEditClick = (index) => {
+    //     setEditIndex(index);
+    //     setNewFileName("");
+    //     // setNewFile(null);
+
+
+    // setEditStates((prevStates) => {
+    //     const newStates = [...prevStates];
+    //     newStates[index] = {
+    //         newFileName: "",
+    //         newFile: null,
+    //     };
+    //     return newStates;
+    // });
+    
+    //     // Trigger click on the hidden file input
+    //     // const fileInput = document.getElementById(`fileInput-${index}`);
+    //     const fileInputId = `fileInput-${index}`;
+    //     const fileInput = document.getElementById(fileInputId);
+    //     if (fileInput) {
+    //         fileInput.click();
+    //     }
+    // };
+
+    // onClick={() => handleDelete(index)}

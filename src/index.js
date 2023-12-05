@@ -23,16 +23,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <BrowserRouter> */}
+    {/* <BrowserRouter> */}
     {/* <App /> */}
     <HomePage/>
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
-    {/* <FlashcardManagement/> */}
-    {/* <LearningSession/> */}
     {/* <FlashcardProgress/> */}
     {/* <LearningSession/> */}
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
+    {/* </BrowserRouter> */}
     {/* </BrowserRouter> */}
   </React.StrictMode>
 );
