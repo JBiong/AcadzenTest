@@ -88,6 +88,7 @@ const Login = () => {
     } catch (error) {
         console.error("Error during login:", error);
         setError("An error occurred during login");
+        alert("Account have been deleted!");
     }
   };
 

@@ -308,12 +308,14 @@ const Dashboard = () => {
         <div className="quizact">
           <h3>Recent Quiz Activity</h3>
           <div className="insidequizdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}></div>
-          <div className="dluserinfodiv"><Button 
-          color="inherit"
-          type="submit"
-          variant="contained"
-          style={{ fontSize:'12px', width: '200px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px', marginTop:'5px' }}
-          onClick={handleDownload}>Download User Data</Button></div>
+          {/* <div className="dluserinfodiv">
+            <Button 
+              color="inherit"
+              type="submit"
+              variant="contained"
+              style={{ fontSize:'12px', width: '200px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px', marginTop:'5px' }}
+              onClick={handleDownload}>Download User Data
+            </Button></div> */}
         </div>
         <div className="recentdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
           <div className="uploadstatus" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>

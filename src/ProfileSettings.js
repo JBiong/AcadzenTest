@@ -125,6 +125,7 @@ const ProfileSettings = () => {
       .then((data) => {
         console.log(data);
         // Handle successful delete here. For example, you can redirect the user to the login page.
+        alert("Account has been deleted!");
       })
       .catch((error) => console.error('Error:', error));
   };
@@ -520,9 +521,11 @@ const ProfileSettings = () => {
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleDeleteDialogClose} style={{backgroundColor:'pink', color:'black'}}>Cancel</Button>
+                  <Link to='/' style={{ textDecoration: 'none' }}>
                   <Button onClick={() => { deleteUser(); handleDeleteDialogClose(); }} style={{backgroundColor:'lightgreen', color:'black'}} autoFocus>
                     Confirm
                   </Button>
+                  </Link>
                 </DialogActions>
               </Dialog>
             </div>
