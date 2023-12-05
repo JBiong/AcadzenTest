@@ -197,10 +197,8 @@ function UploadDocument() {
     };
 
     const [replacementFile, setReplacementFile] = useState(null);
-    const [documents, setDocuments] = useState([]);  // Your documents state
-
     
-    const handleReplaceFile = async (index) => {
+    const handleNewFileName = async (index) => {
         try {
             const documentID = uploadedFiles[index]?.documentID;
     
@@ -208,19 +206,22 @@ function UploadDocument() {
                 console.error("Document ID not found for index:", index);
                 return;
             }
-    
+
+            // Check if newFileName is empty and replacementFile is not provided
+            if (!newFileName && !replacementFile) {
+                toast.warning("Please provide a new file name", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
+                return;
+            }
+
             const formData = new FormData();
-            const newFileNameValue = newFileName || uploadedFiles[index]?.documentTitle;
-            formData.append(
-                "document",
-                new Blob([JSON.stringify({ documentTitle: newFileNameValue })], {
-                    type: "application/json",
-                })
-            );
+            formData.append('newFileName', newFileName);
     
             // Append the new file if it exists
-            if (newFile) {
-                formData.append("newFile", newFile);
+            if (replacementFile) {
+                formData.append("newFile", replacementFile);
             }
     
             const response = await fetch(
@@ -235,35 +236,27 @@ function UploadDocument() {
             );
     
             if (!response.ok) {
-                throw new Error("File update failed. Please try again.");
+                throw new Error('Network response was not ok');
             }
     
-            // Fetch the updated files after successful replacement
-            await fetchUploadedFiles();
+            const responseData = await response.json();
+            console.log('Update response:', responseData);
+
+            //Update the file name after being change
+            const newUploadedFiles = [...uploadedFiles];
+            newUploadedFiles[index].documentTitle = newFileName;
+            setUploadedFiles(newUploadedFiles);
     
-            const updatedFiles = uploadedFiles.map((file, i) =>
-                i === index
-                    ? {
-                        documentID: documentID,
-                        documentTitle: newFileNameValue,
-                        fileType: newFile ? getFileType(newFile.name) : file.fileType,
-                        fileSize: newFile ? formatFileSize(newFile.size) : file.fileSize,
-                    }
-                    : file
-            );
-    
-            setUploadedFiles(updatedFiles);
-            handleCancelEdit();
-            toast.success("File successfully updated!", {
+            // Display a success toast message
+            toast.success('File name updated successfully!', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 500,
             });
         } catch (error) {
-            console.error("Error in handleReplaceFile:", error);
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 1000,
-            });
+            console.error('Error updating file name:', error);
+    
+            // Display an error toast message
+            toast.error('Error updating file name: ' + error.message);
         }
     };
 
@@ -277,25 +270,6 @@ function UploadDocument() {
             console.log("File Size:", formatFileSize(file.size));
         }
     };
-
-    const handleFileEditChange = (e, index) => {
-        const file = e.target.files[0];
-
-        if (file && editIndex !== null) {
-            // // Set the new file in the edit state
-            // setNewFile(file);
-            // Set the new file in the edit state for this index
-            setEditStates((prevStates) => {
-                const newStates = [...prevStates];
-                newStates[index] = {
-                    ...newStates[index],
-                    newFile: file,
-                };
-                return newStates;
-            });
-        }
-    };
-    
 
     const handleCancelEdit = () => {
     setEditIndex(null);
@@ -314,90 +288,18 @@ function UploadDocument() {
         return newStates;
     });
 };
+ 
 
+      // Delete using confirmation modal
 
-const handleSaveEdit = async () => {
-    try {
-        console.log('Save edit clicked. EditIndex:', editIndex);
-      if (editIndex !== null && newFileName.trim() !== "") {
-        const documentID = uploadedFiles[editIndex]?.documentID;
-        console.log('Document ID before update:', documentID);
-        const newFile = editStates[editIndex]?.newFile;
+      const handleDeleteClick = (documentID) => {
+        // Set the document ID to be deleted
+        setDocumentToDelete(documentID);
 
-         console.log('Document ID:', documentID);
-        console.log('New File:', newFile);
-  
-        if (!documentID) {
-          console.error('Document ID not found for editIndex:', editIndex);
-          return;
-        }
-  
-        const formData = new FormData();
-        formData.append('document', new Blob([JSON.stringify({ documentTitle: newFileName })], { type: 'application/json' }));
-        
-        // Append the new file if it exists
-        if (newFile) {
-          formData.append('file', newFile);
-        }
-
-        // Append the replacement file if it exists
-        if (replacementFile) {
-            formData.append('file', replacementFile);
-        }
-
-        // Add this console.log to inspect the uploadedFiles array
-        console.log('Uploaded Files before update:', uploadedFiles);
-  
-        const response = await fetch(`http://localhost:8080/api/document/update/${documentID}`, {  
-          method: 'PUT',
-          body: formData,
-          headers: {},
-        });
-  
-        console.log('Response Status:', response.status);
-        const responseBody = await response.text();
-        console.log('Response Body:', responseBody);
-  
-        if (!response.ok) {
-          throw new Error('File update failed. Please try again.');
-        }
-  
-        const updatedFiles = uploadedFiles.map((file, i) => {
-            if (i === editIndex ) {
-                return {
-                    documentID: documentID,
-                    documentTitle: newFileName || file.documentTitle,
-                    fileType: newFile ? getFileType(newFile.name) : file.fileType,
-                    fileSize: newFile ? formatFileSize(newFile.size) : file.fileSize,
-                };
-            } else {
-                return file;
-            }
-        });
-  
-        setUploadedFiles(updatedFiles);
-        handleCancelEdit();
-  
-        toast.success('File successfully updated!', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 500,
-        });
-      } else {
-        toast.error('Please provide a new name to update.', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1000,
-        });
-      }
-    } catch (error) {
-      console.error('Error in handleSaveEdit:', error);
-      toast.error(error.message, {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 1000,
-      });
-    }
-  };   
-
-      // Delete
+        // Set the confirmation callback and display the modal
+        setConfirmationCallback(() => () => handleDeleteConfirmation(documentID));
+        setShowConfirmation(true);
+    };
 
       const handleDeleteConfirmation = async (documentID) => {
         try {
@@ -425,38 +327,6 @@ const handleSaveEdit = async () => {
             return filteredFiles || prevFiles;  // Return prevFiles if filteredFiles is undefined
 
         }); 
-    
-            toast.success('Document successfully deleted!', {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 500,
-            });
-        } catch (error) {
-            console.error('Error in handleDeleteClick:', error);
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 1000,
-            });
-        }
-    };
-
-    /// Confirmation Modal
-
-    const handleDeleteClick = async (documentID) => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/document/delete/${documentID}`, {
-                method: 'DELETE',
-            });
-    
-            if (!response.ok) {
-                throw new Error('Failed to delete document. Please try again.');
-            }
-    
-            // Fetch the updated files after successful soft deletion
-            await fetchUploadedFiles();
-    
-            const updatedFiles = uploadedFiles.filter(file => file.documentID !== documentID);
-    
-            setUploadedFiles(updatedFiles);
     
             toast.success('Document successfully deleted!', {
                 position: toast.POSITION.TOP_CENTER,
@@ -697,7 +567,7 @@ const handleSaveEdit = async () => {
                                                     
                                                     <IconButton
                                                         style={{ marginRight: '5px', background: '#9CCC65' }}
-                                                        onClick={() => handleReplaceFile(index)} // Updated function name
+                                                        onClick={() => handleNewFileName(index)} // Updated function name
                                                     >
                                                         <SaveIcon />
                                                     </IconButton>
@@ -724,6 +594,15 @@ const handleSaveEdit = async () => {
                             ) : (
                             <p>No uploaded files available.</p>
                             )}
+
+                            {showConfirmation && (
+                                <div className="confirmation-modal">
+                                    <h1 style={{ margin: '10px 10px 20px 50px', fontWeight: 'bold', fontFamily: "Roboto", fontSize: "30px"}}>Delete?</h1>
+                                    <p style={{fontFamily: "Roboto", fontSize: "20px", marginRight: "20px"}}>Deleting this document will erase all data permanently <br /> Are you sure? This cannot be undone</p>
+                                    <button onClick={() => setShowConfirmation(false)}>Cancel</button>
+                                    <button style={{ background: '#FAC712' }} onClick={() => { confirmationCallback(); setShowConfirmation(false); }}>Confirm</button>
+                                </div>
+                                )}
                         </div>
                         </div>
                         
@@ -735,3 +614,85 @@ const handleSaveEdit = async () => {
 }
 
 export default UploadDocument;
+
+
+// const handleSaveEdit = async () => {
+//     try {
+//         console.log('Save edit clicked. EditIndex:', editIndex);
+//       if (editIndex !== null && newFileName.trim() !== "") {
+//         const documentID = uploadedFiles[editIndex]?.documentID;
+//         console.log('Document ID before update:', documentID);
+//         const newFile = editStates[editIndex]?.newFile;
+
+//          console.log('Document ID:', documentID);
+//         console.log('New File:', newFile);
+  
+//         if (!documentID) {
+//           console.error('Document ID not found for editIndex:', editIndex);
+//           return;
+//         }
+  
+//         const formData = new FormData();
+//         formData.append('document', new Blob([JSON.stringify({ documentTitle: newFileName })], { type: 'application/json' }));
+        
+//         // Append the new file if it exists
+//         if (newFile) {
+//           formData.append('file', newFile);
+//         }
+
+//         // Append the replacement file if it exists
+//         if (replacementFile) {
+//             formData.append('file', replacementFile);
+//         }
+
+//         // Add this console.log to inspect the uploadedFiles array
+//         console.log('Uploaded Files before update:', uploadedFiles);
+  
+//         const response = await fetch(`http://localhost:8080/api/document/update/${documentID}`, {  
+//           method: 'PUT',
+//           body: formData,
+//           headers: {},
+//         });
+  
+//         console.log('Response Status:', response.status);
+//         const responseBody = await response.text();
+//         console.log('Response Body:', responseBody);
+  
+//         if (!response.ok) {
+//           throw new Error('File update failed. Please try again.');
+//         }
+  
+//         const updatedFiles = uploadedFiles.map((file, i) => {
+//             if (i === editIndex ) {
+//                 return {
+//                     documentID: documentID,
+//                     documentTitle: newFileName || file.documentTitle,
+//                     fileType: newFile ? getFileType(newFile.name) : file.fileType,
+//                     fileSize: newFile ? formatFileSize(newFile.size) : file.fileSize,
+//                 };
+//             } else {
+//                 return file;
+//             }
+//         });
+  
+//         setUploadedFiles(updatedFiles);
+//         handleCancelEdit();
+  
+//         toast.success('File successfully updated!', {
+//           position: toast.POSITION.TOP_CENTER,
+//           autoClose: 500,
+//         });
+//       } else {
+//         toast.error('Please provide a new name to update.', {
+//           position: toast.POSITION.TOP_CENTER,
+//           autoClose: 1000,
+//         });
+//       }
+//     } catch (error) {
+//       console.error('Error in handleSaveEdit:', error);
+//       toast.error(error.message, {
+//         position: toast.POSITION.TOP_CENTER,
+//         autoClose: 1000,
+//       });
+//     }
+//   };  
