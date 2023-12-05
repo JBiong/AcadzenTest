@@ -8,23 +8,34 @@ import HomePage from './HomePage';
 import Dashboard from './Dashboard';
 import UploadDocument from './UploadDocument';
 import LearningSession from './LearningSession';
-//import FlashcardProgress from .'FlashcardProgress';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
-import FlashcardManagement from './FlahscardProgress';
+<<<<<<< Updated upstream
+import FlashcardManagement from './FlashcardManagement';
+import { BrowserRouter } from 'react-router-dom';
+=======
+import FlashcardProgress from './FlashcardProgress';
+import FlashcardManagement from './FlashcardManagement';
+>>>>>>> Stashed changes
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    {/* <BrowserRouter> */}
     {/* <App /> */}
     <HomePage/>
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
-    {/* <FlashcardProgress/> */}
+<<<<<<< Updated upstream
+    {/* <FlashcardManagement/> */}
     {/* <LearningSession/> */}
+=======
+    {/* <FlashcardProgress/> */}
+    <LearningSession/>
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
+    {/* </BrowserRouter> */}
   </React.StrictMode>
 );
 
