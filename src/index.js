@@ -15,6 +15,7 @@ import FlashcardManagement from './FlashcardManagement';
 import { BrowserRouter } from 'react-router-dom';
 
 import FlashcardProgress from './FlashcardProgress';
+import Pricing from './Pricing';
 // import FlashcardManagement from './FlashcardManagement';
 
 
@@ -22,7 +23,6 @@ import FlashcardProgress from './FlashcardProgress';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <BrowserRouter> */}
     {/* <BrowserRouter> */}
     {/* <App /> */}
     <HomePage/>
@@ -32,7 +32,7 @@ root.render(
     {/* <LearningSession/> */}
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
-    {/* </BrowserRouter> */}
+    {/* <Pricing/> */}
     {/* </BrowserRouter> */}
   </React.StrictMode>
 );
