@@ -183,7 +183,7 @@ function Pricing() {
               </Box>
               </div>
         <div className="sideBar" >
-              <Toolbar style={{paddingTop: '20px'}}>
+              <Toolbar style={{marginTop: '25px'}}>
               <img
                     src="logo.png"
                     alt="AcadZen Logo"
@@ -191,8 +191,9 @@ function Pricing() {
                   />
                   <Typography style={{ fontWeight: 'bold', color: '#8C7111', fontSize: '40px' }}>AcadZen</Typography>
             </Toolbar>
+            <Toolbar>
             <Box display="flex" flexDirection="column" alignItems="center"justifyContent="flex-start" style={{ height: '50vh', marginTop:'50px' }}>
-                <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
                     <Button
                       type="submit"
                       variant={overviewClicked ? "contained" : "outlined"}
@@ -206,7 +207,7 @@ function Pricing() {
                         border:'none',
                         width: '250px',
                         borderRadius: '10px',
-                        backgroundColor: overviewClicked ? 'white' : '#FFD234',
+                        backgroundColor: overviewClicked ? 'white' : '#f7c81e',
                         color: overviewClicked ? '#8C7111' : 'black',
                         fontWeight: 'bold',
                         height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
@@ -228,7 +229,7 @@ function Pricing() {
                       border:'none',
                       width: '250px',
                       borderRadius: '10px',
-                      backgroundColor: documentClicked ? 'white' : '#FFD234',
+                      backgroundColor: documentClicked ? 'white' : '#f7c81e',
                       color: documentClicked ? '#8C7111' : 'black',
                       fontWeight: 'bold',
                       height: '65px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
@@ -249,7 +250,7 @@ function Pricing() {
                     border:'none',
                     width: '250px',
                     borderRadius: '10px',
-                    backgroundColor: dreamboardClicked ? 'white' : '#FFD234',
+                    backgroundColor: dreamboardClicked ? 'white' : '#f7c81e',
                     color: dreamboardClicked ? '#8C7111' : 'black',
                     fontWeight: 'bold',
                     height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
@@ -269,7 +270,7 @@ function Pricing() {
                     border:'none',
                     width: '250px',
                     borderRadius: '10px',
-                    backgroundColor: mentalHealthClicked ? 'white' : '#FFD234',
+                    backgroundColor: mentalHealthClicked ? 'white' : '#f7c81e',
                     color: mentalHealthClicked ? '#8C7111' : 'black',
                     fontWeight: 'bold',
                     height: '65px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
@@ -290,7 +291,7 @@ function Pricing() {
                     border:'none',
                     width: '250px',
                     borderRadius: '10px',
-                    backgroundColor: pricingClicked ? 'white' : '#FFD234',
+                    backgroundColor: pricingClicked ? 'white' : '#f7c81e',
                     color: pricingClicked ? '#8C7111' : 'black',
                     fontWeight: 'bold',
                     height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
@@ -312,7 +313,7 @@ function Pricing() {
                     border:'none',
                     width: '250px',
                     borderRadius: '10px',
-                    backgroundColor: settingClicked ? 'white' : '#FFD234',
+                    backgroundColor: settingClicked ? 'white' : '#f7c81e',
                     color: settingClicked ? '#8C7111' : 'black',
                     fontWeight: 'bold',
                     height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
@@ -320,7 +321,9 @@ function Pricing() {
                   onClick={() => handleButtonClick('setting')}
                 ><SettingsIcon style={{marginRight:'25px', marginLeft: '25px'}}/> Setting</Button>
                 </Link>
-                <div className="contactPanel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        </Box>
+      </Toolbar>
+      <div className="contactPanel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <p style={{ marginBottom: '20px', width: '200px' }}>Encountering problems with our service? Reach out to our customer support team for assistance.</p>
         <Button
           color="inherit"
@@ -329,9 +332,7 @@ function Pricing() {
           style={{ fontSize:'15px', width: '250px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px' }}
         > Contact us</Button>
       </div>
-            </Box>
         </div>
-
 
     </div>
     </div>

@@ -238,118 +238,144 @@ const ProfileSettings = () => {
           <Toolbar>
           <Box display="flex" flexDirection="column" alignItems="center"justifyContent="flex-start" style={{ height: '50vh', marginTop:'50px' }}>
           <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-            <Button
-              color="inherit"
-              type="submit"
-              variant={overviewClicked ? "contained" : "outlined"}
-              style={{
-                fontSize: '15px',
-                border:'none',
-                width: '250px',
-                borderRadius: '10px',
-                backgroundColor: overviewClicked ? 'white' : '#FAC712',
-                color: overviewClicked ? '#8C7111' : 'black',
-                fontWeight: 'bold',
-                height: '40px',marginBottom: '30px'
-              }}
-              onClick={() => handleButtonClick('overview')}
-            ><GradingIcon style={{marginRight:'10px'}}/> Overview</Button>
-          </Link>
-          <Link to="/uploaddocument" style={{ textDecoration: 'none' }}>
-            <Button
-            color="inherit"
-            type="submit"
-            variant={documentClicked ? "contained" : "outlined"}
-            style={{
-              fontSize: '13px',
-              border:'none',
-              width: '270px',
-              borderRadius: '10px',
-              backgroundColor: documentClicked ? 'white' : '#FAC712',
-              color: documentClicked ? '#8C7111' : 'black',
-              fontWeight: 'bold',
-              height: '40px',marginBottom: '30px'
-            }}
-            onClick={() => handleButtonClick('document')}
-          ><PictureAsPdfIcon style={{marginRight:'10px'}}/> Document to Flashcards</Button>
-          </Link>
-            <Button
-            color="inherit"
-            type="submit"
-            variant={dreamboardClicked ? "contained" : "outlined"}
-            style={{
-              fontSize: '15px',
-              border:'none',
-              width: '250px',
-              borderRadius: '10px',
-              backgroundColor: dreamboardClicked ? 'white' : '#FAC712',
-              color: dreamboardClicked ? '#8C7111' : 'black',
-              fontWeight: 'bold',
-              height: '40px',marginBottom: '30px'
-            }}
-            onClick={() => handleButtonClick('dreamboard')}
-          ><CloudQueueIcon style={{marginRight:'10px'}}/> Dreamboard</Button>
-              <Button
-            color="inherit"
-            type="submit"
-            variant={mentalHealthClicked ? "contained" : "outlined"}
-            style={{
-              fontSize: '13px',
-              border:'none',
-              width: '250px',
-              borderRadius: '10px',
-              backgroundColor: mentalHealthClicked ? 'white' : '#FAC712',
-              color: mentalHealthClicked ? '#8C7111' : 'black',
-              fontWeight: 'bold',
-              height: '40px',marginBottom: '30px'
-            }}
-            onClick={() => handleButtonClick('mentalHealth')}
-          ><SpaIcon style={{marginRight:'10px'}}/> Mental Health Support</Button>
-              <Button
-            color="inherit"
-            type="submit"
-            variant={pricingClicked ? "contained" : "outlined"}
-            style={{
-              fontSize: '15px',
-              border:'none',
-              width: '250px',
-              borderRadius: '10px',
-              backgroundColor: pricingClicked ? 'white' : '#FAC712',
-              color: pricingClicked ? '#8C7111' : 'black',
-              fontWeight: 'bold',
-              height: '40px',marginBottom: '30px'
-            }}
-            onClick={() => handleButtonClick('pricing')}
-          ><MonetizationOnIcon style={{marginRight:'10px'}}/> Pricing</Button>
-            <Link to="/profilesettings" style={{ textDecoration: 'none' }}>
-            <Button
-            color="inherit"
-            type="submit"
-            variant={settingClicked ? "contained" : "outlined"}
-            style={{
-              fontSize: '15px',
-              border:'none',
-              width: '250px',
-              borderRadius: '10px',
-              backgroundColor: settingClicked ? 'white' : '#FAC712',
-              color: settingClicked ? '#8C7111' : 'black',
-              fontWeight: 'bold',
-              height: '40px',marginBottom: '30px'
-            }}
-            onClick={() => handleButtonClick('setting')}
-          ><SettingsIcon style={{marginRight:'10px'}}/> Setting</Button>
-          </Link>
+                    <Button
+                      type="submit"
+                      variant={overviewClicked ? "contained" : "outlined"}
+                      style={{
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'flex-start', 
+                        fontSize: '20px',
+                        paddingLeft: '10px', 
+                        fontSize: '20px',
+                        border:'none',
+                        width: '250px',
+                        borderRadius: '10px',
+                        backgroundColor: overviewClicked ? 'white' : '#f7c81e',
+                        color: overviewClicked ? '#8C7111' : 'black',
+                        fontWeight: 'bold',
+                        height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
+                      }}
+                      onClick={() => handleButtonClick('overview')}
+                    ><GradingIcon style={{marginRight:'25px', marginLeft: '25px'}}/> Overview</Button>
+                </Link>
+                <Link to="/uploaddocument" style={{ textDecoration: 'none' }}>
+                    <Button
+                    type="submit"
+                    variant={documentClicked ? "contained" : "outlined"}
+                    style={{
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'flex-start', 
+                      fontSize: '20px',
+                      paddingLeft: '10px',
+                      fontSize: '20px',
+                      border:'none',
+                      width: '250px',
+                      borderRadius: '10px',
+                      backgroundColor: documentClicked ? 'white' : '#f7c81e',
+                      color: documentClicked ? '#8C7111' : 'black',
+                      fontWeight: 'bold',
+                      height: '65px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
+                    }}
+                    onClick={() => handleButtonClick('document')}
+                  ><PictureAsPdfIcon style={{marginRight:'25px', marginLeft: '25px'}}/> Document to Flashcards</Button>
+                </Link>
+                  <Button
+                  type="submit"
+                  variant={dreamboardClicked ? "contained" : "outlined"}
+                  style={{
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'flex-start', 
+                    fontSize: '20px',
+                    paddingLeft: '10px', 
+                    fontSize: '20px',
+                    border:'none',
+                    width: '250px',
+                    borderRadius: '10px',
+                    backgroundColor: dreamboardClicked ? 'white' : '#f7c81e',
+                    color: dreamboardClicked ? '#8C7111' : 'black',
+                    fontWeight: 'bold',
+                    height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
+                  }}
+                  onClick={() => handleButtonClick('dreamboard')}
+                ><CloudQueueIcon style={{marginRight:'25px', marginLeft: '25px'}}/> Dreamboard</Button>
+                    <Button
+                  type="submit"
+                  variant={mentalHealthClicked ? "contained" : "outlined"}
+                  style={{
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'flex-start', 
+                    fontSize: '20px',
+                    paddingLeft: '10px', 
+                    fontSize: '20px',
+                    border:'none',
+                    width: '250px',
+                    borderRadius: '10px',
+                    backgroundColor: mentalHealthClicked ? 'white' : '#f7c81e',
+                    color: mentalHealthClicked ? '#8C7111' : 'black',
+                    fontWeight: 'bold',
+                    height: '65px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
+                  }}
+                  onClick={() => handleButtonClick('mentalHealth')}
+                ><SpaIcon style={{marginRight:'25px', marginLeft: '25px'}}/> Mental Health Support</Button>
+                <Link to="/pricing" style={{ textDecoration: 'none' }}>
+                  <Button
+                  type="submit"
+                  variant={pricingClicked? "contained" : "outlined"}
+                  style={{
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'flex-start', 
+                    fontSize: '20px',
+                    paddingLeft: '10px', 
+                    fontSize: '20px',
+                    border:'none',
+                    width: '250px',
+                    borderRadius: '10px',
+                    backgroundColor: pricingClicked ? 'white' : '#f7c81e',
+                    color: pricingClicked ? '#8C7111' : 'black',
+                    fontWeight: 'bold',
+                    height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
+                  }}
+                  onClick={() => handleButtonClick('price')}
+                ><MonetizationOnIcon style={{marginRight:'25px', marginLeft: '25px'}}/> Pricing</Button>
+                </Link>
+                  <Link to="/profilesettings" style={{ textDecoration: 'none' }}>
+                  <Button
+                  type="submit"
+                  variant={settingClicked? "contained" : "outlined"}
+                  style={{
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'flex-start', 
+                    fontSize: '20px',
+                    paddingLeft: '10px', 
+                    fontSize: '20px',
+                    border:'none',
+                    width: '250px',
+                    borderRadius: '10px',
+                    backgroundColor: settingClicked ? 'white' : '#f7c81e',
+                    color: settingClicked ? '#8C7111' : 'black',
+                    fontWeight: 'bold',
+                    height: '40px',marginBottom: '30px', fontFamily: 'Nunito Sans', textTransform: 'none', textAlign: 'left'
+                  }}
+                  onClick={() => handleButtonClick('setting')}
+                ><SettingsIcon style={{marginRight:'25px', marginLeft: '25px'}}/> Setting</Button>
+                </Link>
           </Box>
         </Toolbar>
-        <div className="contactusdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <p style={{ marginBottom: '20px', width: '200px' }}>Encountering problems with our service? Reach out to our customer support team for assistance.</p>
-          <Button
-            color="inherit"
-            type="submit"
-            variant="contained"
-            style={{ fontSize:'15px', width: '250px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px' }}
-          > Contact us</Button>
-        </div>
+        <div className="contactPanel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <p style={{ marginBottom: '20px', width: '200px' }}>Encountering problems with our service? Reach out to our customer support team for assistance.</p>
+        <Button
+          color="inherit"
+          type="submit"
+          variant="contained"
+          style={{ fontSize:'15px', width: '250px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px' }}
+        > Contact us</Button>
+      </div>
       </div>
       <div className="namecontainer">
       <div className="logoutdiv" style={{display:'flex', justifyContent:'center', alignItems: 'flex-start'}}>
