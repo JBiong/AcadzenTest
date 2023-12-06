@@ -21,6 +21,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LanguageIcon from '@mui/icons-material/Language';
 import ProfileSettings from './ProfileSettings';
 import FlashcardManagement from './FlashcardManagement';
+import Pricing from './Pricing';
 
 export default function HomePage() {
     const [user, setUser] = React.useState(null);
@@ -65,6 +66,7 @@ export default function HomePage() {
                     <Route path='/learningsession' element={<LearningSession/>} />
                     <Route path='/aboutus' element={<AboutUs />} />
                     <Route path='/aboutacadzen' element={<AboutAcadZen />} />
+                    <Route path='/pricing' element={<Pricing />} />
                     <Route path="/login" element={<Login isSignInView={isSignInView} setIsSignInView={setIsSignInView} />} />
                     <Route path="/signup" element={<Signup handleToggle={() => setShowLogin(false)} />} />
                     <Route path='/profilesettings' element={<ProfileSettings/>} />

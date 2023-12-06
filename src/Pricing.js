@@ -132,6 +132,7 @@ function Pricing() {
   };
 
   return (
+    <div className="welcome-back-page">
     <div style={{backgroundColor: '#F5D56E', minHeight: '100vh', position: 'relative'}}>
         <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '10px', position: 'absolute', top: '35px', right: '100px'}}>
               <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
@@ -332,6 +333,7 @@ function Pricing() {
         </div>
 
 
+    </div>
     </div>
   );
 }
