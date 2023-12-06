@@ -27,6 +27,8 @@ const Dashboard = () => {
   const [enteredUsername, setEnteredUsername] = useState(""); // Use the entered username
   const [userName, setUserName] = useState(""); // Set a default value
 
+  const [documentCount, setDocumentCount] = useState(0);
+
   useEffect(() => {
     // Check if the current location is /dashboard and set the Overview button state accordingly
     setOverviewClicked(location.pathname === "/dashboard");
@@ -36,6 +38,17 @@ const Dashboard = () => {
     setPricingClicked(location.pathname === "/pricing");
     setSettingClicked(location.pathname === "/profilesettings")
     setContactUsClicked(location.pathname === "/contactus");
+
+    const userno = localStorage.getItem('userno');
+
+    axios.get(`http://localhost:8080/api/document/files/${userno}`)
+        .then(response => {
+            setUserData(response.data);
+            setDocumentCount(response.data.length);
+        })
+        .catch(error => {
+            console.error('Error retrieving documents!', error);
+        });
     
     // Extract entered username from location state
     const newEnteredUsername = location.state?.enteredUsername || "";
@@ -343,8 +356,30 @@ const Dashboard = () => {
               onClick={handleDownload}>Download User Data
             </Button></div> */}
         </div>
-        <div className="recentdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
-          <div className="uploadstatus" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
+          <div className="recentdiv" style={{ display: 'flex', flexDirection: 'space-between'}}>
+          <h3>Recent Flashcards</h3>
+          </div>
+          <div className="uploadstatus" style={{ display: 'flex', flexDirection: 'space-between'}}>
+            <h3>Upload Status</h3>
+            <div className="uploadstatus1" style={{ display: 'flex', flexDirection: 'column', alignItems:'center'}}>
+              <Typography variant="h8" style={{fontWeight:'bold'}}>
+              {documentCount}
+              </Typography>
+              <Typography variant="h8" style={{fontWeight:'bold'}}>
+              Documents Uploaded
+              </Typography>
+            </div>
+            <div className="uploadstatus2" style={{ display: 'flex', flexDirection: 'space-between', alignItems:'start'}}>
+              <h4>Documents in Queue</h4>
+            </div>
+            <div className="uploadstatus3" style={{ display: 'flex', flexDirection: 'space-between', alignItems:'start'}}>
+              <h4>Documents Converted</h4>
+            </div>
+            <div className="uploadstatus4" style={{ display: 'flex', flexDirection: 'space-between', alignItems:'start'}}>
+              <h4>Conversion Errors</h4>
+            </div>
+          </div>
+          
           <div className="currentstreakdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
           <div className="mottocontainer">
               <img src="/quote.png" alt="Quote for to day" style={{ width: '100%', marginTop: '55px' }} />
