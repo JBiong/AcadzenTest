@@ -69,6 +69,8 @@ const ProfileSettings = () => {
     const storedEmail = localStorage.getItem('email');
     setEmail(storedEmail);
     console.log(storedEmail);
+
+    fetchProfilePicture();
   }, [location.pathname]);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -114,6 +116,35 @@ const ProfileSettings = () => {
     .catch((error) => console.error('Error:', error));
   };
 
+  const handleFileUpload = () => {
+    const formData = new FormData();
+    const fileInput = document.getElementById("fileInput");
+    formData.append("file", fileInput.files[0]);
+    formData.append("userno", userno);
+
+    fetch("http://localhost:8080/api/profile/uploadProfilePicture", {
+        method: "POST",
+        body: formData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        // Handle successful upload here. For example, you can set the selected image to the uploaded image.
+        setSelectedImage(URL.createObjectURL(fileInput.files[0]));
+    })
+    .catch((error) => console.error("Error:", error));
+  };
+
+  const fetchProfilePicture = () => {
+    fetch(`http://localhost:8080/api/profile/getProfilePicture/${userno}`)
+        .then((response) => response.blob())
+        .then((blob) => {
+            // Set the selected image for display
+            setSelectedImage(URL.createObjectURL(blob));
+        })
+        .catch((error) => console.error("Error:", error));
+  };
+
   const deleteUser = () => {
     fetch(`http://localhost:8080/api/user/delete/${userno}`, {
       method: 'PUT', // Assuming your deleteUser endpoint uses a PUT request
@@ -133,8 +164,15 @@ const ProfileSettings = () => {
 
   const handleImageButtonClick = () => {
     // Programmatically trigger the hidden file input
-    document.getElementById("fileInput").click();
-  };
+    const fileInput = document.getElementById("fileInput");
+    fileInput.click();
+
+    fileInput.onchange = () => {
+        if (fileInput.files.length > 0) {
+            handleFileUpload();
+        }
+    };
+};
 
   const handleDeleteDialogOpen = () => {
     setOpenDeleteDialog(true);
