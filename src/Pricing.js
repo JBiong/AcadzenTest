@@ -174,7 +174,7 @@ function Pricing() {
               <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '40px', textAlign: 'left', marginBottom: '25px'}}>Monthly </Typography>
               <Typography style={{ fontFamily: 'Inter', color: '#9FA0A0', fontSize: '22px', textAlign: 'left'}}>Amount billed today</Typography>
               <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-              <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '32px', textAlign: 'left', marginRight: '10px'}}>₱300.00</Typography>
+              <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '32px', textAlign: 'left', marginRight: '10px'}}>₱30.00</Typography>
               <Typography style={{ fontFamily: 'Inter', color: '#9FA0A0', fontSize: '15px', textAlign: 'left'}}> / month</Typography>
               </div>
               <Button style={{background: '#332D2D', fontFamily: 'Inter', fontSize: '20px', fontWeight: 'bold', color: '#FAC712', marginTop: '70px',marginLeft: '15px',
