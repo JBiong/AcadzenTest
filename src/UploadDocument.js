@@ -341,9 +341,32 @@ function UploadDocument() {
         }
     };
 
-    const handleGenerateClick = (index) => {
-        // Implement your generate logic here
-        console.log("Generate button clicked for index:", index);
+    const handleGenerateClick = async (index) => {
+        try {
+            // Get the document ID of the file at the given index
+            const documentID = uploadedFiles[index]?.documentID;
+    
+            // Make a request to the backend service to generate flashcards
+            const response = await fetch(`http://localhost:8080/api/flashcard/generate/${documentID}`, {
+                method: 'PUT',
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to generate flashcards. Please try again.');
+            }
+    
+            // Parse the response data as JSON
+            const flashcards = await response.json();
+    
+            // Do something with the flashcards...
+            console.log(flashcards);
+        } catch (error) {
+            console.error('Error in handleGenerateClick:', error);
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1000,
+            });
+        }
     };
 
     // Add ToastContainer at the root level of your component tree

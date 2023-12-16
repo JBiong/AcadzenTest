@@ -28,6 +28,7 @@ const Dashboard = () => {
   const [userName, setUserName] = useState(""); // Set a default value
 
   const [documentCount, setDocumentCount] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     // Check if the current location is /dashboard and set the Overview button state accordingly
@@ -69,6 +70,19 @@ const Dashboard = () => {
     .catch(error => {
       console.error('There was an error retrieving the user data!', error);
     });
+
+    const fetchProfilePicture = () => {
+      fetch(`http://localhost:8080/api/profile/getProfilePicture/${userno}`)
+          .then((response) => response.blob())
+          .then((blob) => {
+              // Set the selected image for display
+              setSelectedImage(URL.createObjectURL(blob));
+          })
+          .catch((error) => console.error("Error:", error));
+    };
+
+    fetchProfilePicture();
+
   }, [location.pathname, location.state?.enteredUsername]);
 
   const convertToCSV = (data) => {
@@ -329,11 +343,32 @@ const Dashboard = () => {
       </div>
       <div className="namecontainer">
         <Toolbar style={{ margin: '10px' }}>
-          <img
-            src="prof.png"
-            alt="AcadZen profile"
-            style={{ width: '70px' }}
-          />
+          <Link to='/profilesettings'>
+          <Button
+            variant="contained"
+            color="primary"
+            // onClick={handleImageButtonClick}
+            style={{
+              borderRadius: '50%', // Make the button circular
+              width: '75px',
+              height: '68px',
+              padding: 0,
+              // marginTop:'20px',
+              backgroundColor: 'white'
+            }}
+          >
+            {selectedImage ? (
+              <img
+                src={selectedImage}
+                alt="User Avatar"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+              />
+            ) : (
+              // <Logout />
+              <></>
+            )}
+          </Button>
+          </Link>
           <div style={{ marginLeft: '20px' }}>
             <Typography variant="h6" style={{ fontWeight: 'bold', fontFamily: 'Montserrat' }}>
               Welcome Back,
