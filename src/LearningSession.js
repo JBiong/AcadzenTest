@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LearningSession.css";
 import { AppBar, Toolbar, Typography, IconButton, Box, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function LearningSession() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -57,6 +58,22 @@ function LearningSession() {
 
   const currentFlashcard = flashcards["Rizal's Lovers"][currentCardIndex];
 
+  const fetchLearningSessions = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/LearningSession/getAllLearningSession');
+      const learningSessions = response.data; // Assuming your API returns data in JSON format
+      console.log('Learning Sessions:', learningSessions);
+      // Perform further actions with the retrieved data (e.g., set state, display data)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle errors accordingly
+    }
+  };
+
+  const handleFetchLearningSessions = () => {
+    fetchLearningSessions();
+  };
+
     return (
     <>
     <div className="welcome-back-page">
@@ -84,7 +101,7 @@ function LearningSession() {
                 </Box>
             </Toolbar>
         </AppBar>
-
+        
         <div className="center-panel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
           <Typography variant="h4" style={{ textAlign: 'center' }}>Rizal's Lover</Typography>
           <div className="inner-panel" style={{ position: 'relative' }}>
@@ -143,7 +160,11 @@ function LearningSession() {
                 <Button variant="contained" onClick={toggleMemorized}>
                     Marked as Memorized
                 </Button>
+                <Button onClick={handleFetchLearningSessions}>
+                  Fetch Learning Sessions
+                </Button>
             </div>
+            
     </div>
 
     </>
