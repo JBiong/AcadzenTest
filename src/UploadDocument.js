@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
 import SaveIcon from "@mui/icons-material/Save";
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+// import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie'; 
@@ -20,32 +21,36 @@ function UploadDocument() {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [confirmationCallback, setConfirmationCallback] = useState(null);
     const [documentToDelete, setDocumentToDelete] = useState(null);
-    const userno = Cookies.get('userno')
 
-    // Fetch uploaded files from the backend when the component mounts
-    const fetchUploadedFiles = async () => {
+    const { files, user } = uploadedFiles;
+
+    const userno = localStorage.getItem('userno');
+
+        // Fetch uploaded files from the backend when the component mounts
+        const fetchUploadedFiles = async () => {
+            console.log(userno);
             try {
-                const response = await fetch('http://localhost:8080/api/document/files');
-                if (!response.ok) {
+                // Fetch uploaded files
+                const filesResponse = await fetch(`http://localhost:8080/api/document/files/${userno}`);
+                if (!filesResponse.ok) {
                     throw new Error('Failed to fetch uploaded files.');
                 }
-                const data = await response.json();
-        
-                console.log('Fetched Files:', data);
+                const filesData = await filesResponse.json();
         
                 // Filter out deleted files (isDeleted = 0)
-                const filteredFiles = data.filter(file => file.isDeleted !== 1);
+                const filteredFiles = filesData.filter(file => file.isDeleted !== 1);
         
                 setUploadedFiles(prevFiles => {
                     Cookies.set('uploadedFiles', JSON.stringify(filteredFiles));
                     localStorage.setItem("uploadedFiles", JSON.stringify(filteredFiles));
-                    return filteredFiles;
+                    return filteredFiles || [];
                 });
             } catch (error) {
                 console.error(error.message);
             }
         };
- 
+        
+    
         useEffect(() => {
             // Fetch uploaded files from the backend when the component mounts and when the page is refreshed
             fetchUploadedFiles();
@@ -101,18 +106,19 @@ function UploadDocument() {
         return `${size.toFixed(2)} ${units[index]}`;
     };
     
-
     const handleUploadClick = async () => {
         if (selectedFile) {
             const fileType = getFileType(selectedFile.name);
     
             if (['pdf', 'docx', 'pptx', 'txt'].includes(fileType)) {
                 try {
+                    console.log(userno);
+
                     const formData = new FormData();
-                    formData.append('document', new Blob([JSON.stringify({ documentTitle: selectedFile.name, fileType: fileType, isDeleted: 0 })], { type: 'application/json' }));
+                    formData.append('document', new Blob([JSON.stringify({ documentTitle: selectedFile.name, fileType: fileType, isDeleted: 0, isDeleted: 0 })], { type: 'application/json' }));
                     formData.append('file', selectedFile);
     
-                    const response = await fetch('http://localhost:8080/api/document/upload', {
+                    const response = await fetch(`http://localhost:8080/api/document/upload/${userno}`, {
                         method: 'POST',
                         body: formData,
                         headers: {},
@@ -192,38 +198,32 @@ function UploadDocument() {
 
     const [replacementFile, setReplacementFile] = useState(null);
     
-    const handleReplaceFile = async (index) => {
+    const handleNewFileName = async (index) => {
         try {
             const documentID = uploadedFiles[index]?.documentID;
-
+    
             if (!documentID) {
                 console.error("Document ID not found for index:", index);
                 return;
             }
-            
+
             // Check if newFileName is empty and replacementFile is not provided
             if (!newFileName && !replacementFile) {
-            toast.warning("Please provide a new file name or choose a new file.", {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 2000,
-            });
-            return;
-        }
-
-            const formData = new FormData();
-            const newFileNameValue = newFileName || uploadedFiles[index]?.documentTitle;
-            formData.append(
-                "document",
-                new Blob([JSON.stringify({ documentTitle: newFileNameValue })], {
-                    type: "application/json",
-                })
-            );
-
-            // Append the new file if it exists
-            if (replacementFile) {
-                formData.append("file", replacementFile);
+                toast.warning("Please provide a new file name", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
+                return;
             }
 
+            const formData = new FormData();
+            formData.append('newFileName', newFileName);
+    
+            // Append the new file if it exists
+            if (replacementFile) {
+                formData.append("newFile", replacementFile);
+            }
+    
             const response = await fetch(
                 `http://localhost:8080/api/document/update/${documentID}`,
                 {
@@ -234,45 +234,29 @@ function UploadDocument() {
                     },
                 }
             );
-
-            console.log("Response Status:", response.status);
-            const responseBody = await response.text();
-            console.log("Response Body:", responseBody);
-
+    
             if (!response.ok) {
-                throw new Error("File update failed. Please try again.");
+                throw new Error('Network response was not ok');
             }
+    
+            const responseData = await response.json();
+            console.log('Update response:', responseData);
 
-            // Fetch the updated files after successful replacement
-           await fetchUploadedFiles();
-
-            const updatedFiles = uploadedFiles.map((file, i) =>
-                i === index
-                    ? {
-                          documentID: documentID,
-                          documentTitle: newFileNameValue, 
-                          fileType: replacementFile
-                              ? getFileType(replacementFile.name)
-                              : file.fileType,
-                          fileSize: replacementFile
-                              ? formatFileSize(replacementFile.size)
-                              : file.fileSize,
-                      }
-                    : file
-            );
-
-            setUploadedFiles(updatedFiles);
-            handleCancelEdit();
-            toast.success("File successfully updated!", {
+            //Update the file name after being change
+            const newUploadedFiles = [...uploadedFiles];
+            newUploadedFiles[index].documentTitle = newFileName;
+            setUploadedFiles(newUploadedFiles);
+    
+            // Display a success toast message
+            toast.success('File name updated successfully!', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 500,
             });
         } catch (error) {
-            console.error("Error in handleReplaceFile:", error);
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 1000,
-            });
+            console.error('Error updating file name:', error);
+    
+            // Display an error toast message
+            toast.error('Error updating file name: ' + error.message);
         }
     };
 
@@ -285,7 +269,7 @@ function UploadDocument() {
             console.log("Replacement File Selected:", file.name);
             console.log("File Size:", formatFileSize(file.size));
         }
-    }; 
+    };
 
     const handleCancelEdit = () => {
     setEditIndex(null);
@@ -304,8 +288,18 @@ function UploadDocument() {
         return newStates;
     });
 };
+ 
 
-      // Delete
+      // Delete using confirmation modal
+
+      const handleDeleteClick = (documentID) => {
+        // Set the document ID to be deleted
+        setDocumentToDelete(documentID);
+
+        // Set the confirmation callback and display the modal
+        setConfirmationCallback(() => () => handleDeleteConfirmation(documentID));
+        setShowConfirmation(true);
+    };
 
       const handleDeleteConfirmation = async (documentID) => {
         try {
@@ -347,20 +341,32 @@ function UploadDocument() {
         }
     };
 
-    /// Confirmation Modal
-
-    const handleDeleteClick = (documentID) => {
-        // Set the document ID to be deleted
-        setDocumentToDelete(documentID);
-
-        // Set the confirmation callback and display the modal
-        setConfirmationCallback(() => () => handleDeleteConfirmation(documentID));
-        setShowConfirmation(true);
-    };
-
-    const handleGenerateClick = (index) => {
-        // Implement your generate logic here
-        console.log("Generate button clicked for index:", index);
+    const handleGenerateClick = async (index) => {
+        try {
+            // Get the document ID of the file at the given index
+            const documentID = uploadedFiles[index]?.documentID;
+    
+            // Make a request to the backend service to generate flashcards
+            const response = await fetch(`http://localhost:8080/api/flashcard/generate/${documentID}`, {
+                method: 'PUT',
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to generate flashcards. Please try again.');
+            }
+    
+            // Parse the response data as JSON
+            const flashcards = await response.json();
+    
+            // Do something with the flashcards...
+            console.log(flashcards);
+        } catch (error) {
+            console.error('Error in handleGenerateClick:', error);
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1000,
+            });
+        }
     };
 
     // Add ToastContainer at the root level of your component tree
@@ -384,11 +390,12 @@ function UploadDocument() {
                             </div>
                             <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '70px' }}>
                                 <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
-                                    <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-                                        <IconButton color="black" style={{ fontSize: '45px' }}>
-                                            <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
-                                        </IconButton>
-                                    </Link>
+                                <Link to="/dashboard" style={{ textDecoration: 'none' }}> 
+                                    <IconButton color="black" style={{ fontSize: '45px' }}>
+                                        <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
+                                    </IconButton>
+                                </Link>
+
                                 </Box>
                             </Box>
                         </Toolbar>
@@ -580,9 +587,10 @@ function UploadDocument() {
                                                         style={{ display: 'none' }}
 
                                                     />
+                                                    
                                                     <IconButton
                                                         style={{ marginRight: '5px', background: '#9CCC65' }}
-                                                        onClick={() => handleReplaceFile(index)} // Updated function name
+                                                        onClick={() => handleNewFileName(index)} // Updated function name
                                                     >
                                                         <SaveIcon />
                                                     </IconButton>
@@ -603,11 +611,13 @@ function UploadDocument() {
                                             <DeleteIcon />
                                         </IconButton>
                                     </div>
-                                </div>    
+                                </div>
+                                
                             ))
-                                ) : (
-                                <p>No uploaded files available.</p>
-                                )}
+                            ) : (
+                            <p>No uploaded files available.</p>
+                            )}
+
                             {showConfirmation && (
                                 <div className="confirmation-modal">
                                     <h1 style={{ margin: '10px 10px 20px 50px', fontWeight: 'bold', fontFamily: "Roboto", fontSize: "30px"}}>Delete?</h1>
@@ -616,8 +626,9 @@ function UploadDocument() {
                                     <button style={{ background: '#FAC712' }} onClick={() => { confirmationCallback(); setShowConfirmation(false); }}>Confirm</button>
                                 </div>
                                 )}
-                            </div>
-                        </div>                      
+                        </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -627,4 +638,84 @@ function UploadDocument() {
 
 export default UploadDocument;
 
-// Try ra ni
+
+// const handleSaveEdit = async () => {
+//     try {
+//         console.log('Save edit clicked. EditIndex:', editIndex);
+//       if (editIndex !== null && newFileName.trim() !== "") {
+//         const documentID = uploadedFiles[editIndex]?.documentID;
+//         console.log('Document ID before update:', documentID);
+//         const newFile = editStates[editIndex]?.newFile;
+
+//          console.log('Document ID:', documentID);
+//         console.log('New File:', newFile);
+  
+//         if (!documentID) {
+//           console.error('Document ID not found for editIndex:', editIndex);
+//           return;
+//         }
+  
+//         const formData = new FormData();
+//         formData.append('document', new Blob([JSON.stringify({ documentTitle: newFileName })], { type: 'application/json' }));
+        
+//         // Append the new file if it exists
+//         if (newFile) {
+//           formData.append('file', newFile);
+//         }
+
+//         // Append the replacement file if it exists
+//         if (replacementFile) {
+//             formData.append('file', replacementFile);
+//         }
+
+//         // Add this console.log to inspect the uploadedFiles array
+//         console.log('Uploaded Files before update:', uploadedFiles);
+  
+//         const response = await fetch(`http://localhost:8080/api/document/update/${documentID}`, {  
+//           method: 'PUT',
+//           body: formData,
+//           headers: {},
+//         });
+  
+//         console.log('Response Status:', response.status);
+//         const responseBody = await response.text();
+//         console.log('Response Body:', responseBody);
+  
+//         if (!response.ok) {
+//           throw new Error('File update failed. Please try again.');
+//         }
+  
+//         const updatedFiles = uploadedFiles.map((file, i) => {
+//             if (i === editIndex ) {
+//                 return {
+//                     documentID: documentID,
+//                     documentTitle: newFileName || file.documentTitle,
+//                     fileType: newFile ? getFileType(newFile.name) : file.fileType,
+//                     fileSize: newFile ? formatFileSize(newFile.size) : file.fileSize,
+//                 };
+//             } else {
+//                 return file;
+//             }
+//         });
+  
+//         setUploadedFiles(updatedFiles);
+//         handleCancelEdit();
+  
+//         toast.success('File successfully updated!', {
+//           position: toast.POSITION.TOP_CENTER,
+//           autoClose: 500,
+//         });
+//       } else {
+//         toast.error('Please provide a new name to update.', {
+//           position: toast.POSITION.TOP_CENTER,
+//           autoClose: 1000,
+//         });
+//       }
+//     } catch (error) {
+//       console.error('Error in handleSaveEdit:', error);
+//       toast.error(error.message, {
+//         position: toast.POSITION.TOP_CENTER,
+//         autoClose: 1000,
+//       });
+//     }
+//   };  

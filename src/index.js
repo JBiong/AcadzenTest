@@ -11,8 +11,19 @@ import LearningSession from './LearningSession';
 import QuizSession from './QuizSession';
 import AboutAcadZen from './AboutAcadZen';
 import AboutUs from './AboutUs';
+<<<<<<< HEAD
 import FlashcardProgress from './FlashcardProgress';
 import FlashcardManagement from './FlashcardManagement';
+=======
+
+import FlashcardManagement from './FlashcardManagement';
+import { BrowserRouter } from 'react-router-dom';
+
+import FlashcardProgress from './FlashcardProgress';
+import Pricing from './Pricing';
+// import FlashcardManagement from './FlashcardManagement';
+
+>>>>>>> 67352a2fb88ecb7e77945f05911bddd0e7d57aed
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,10 +36,14 @@ root.render(
     {/* <Dashboard/> */}
     {/* <UploadDocument/> */}
     {/* <FlashcardProgress/> */}
+<<<<<<< HEAD
     {/* <FlashcardManagement/> */}
+=======
+>>>>>>> 67352a2fb88ecb7e77945f05911bddd0e7d57aed
     {/* <LearningSession/> */}
     {/* <AboutAcadZen/> */}
     {/* <AboutUs/> */}
+    {/* <Pricing/> */}
     {/* </BrowserRouter> */}
   </React.StrictMode>
 );

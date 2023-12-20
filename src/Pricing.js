@@ -1,17 +1,20 @@
-// Dashboard.js
-import React, { useEffect, useState } from "react";
-import { Box, Button, Toolbar, Typography} from "@mui/material";
-import "./Dashboard.css";
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import React from "react";
+import "./Pricing.css";
+import { Toolbar, Typography, Button, Box, IconButton} from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
 import GradingIcon from '@mui/icons-material/Grading';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import SpaIcon from '@mui/icons-material/Spa';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Link, useLocation } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import { useState, useEffect} from "react";
 import axios from "axios";
+import zIndex from "@mui/material/styles/zIndex";
 
-const Dashboard = () => {
+function Pricing() {
+
   const location = useLocation();
 
   const [userData, setUserData] = useState([]);
@@ -25,10 +28,7 @@ const Dashboard = () => {
   const [contactUsClicked, setContactUsClicked] = useState(false);
 
   const [enteredUsername, setEnteredUsername] = useState(""); // Use the entered username
-  const [userName, setUserName] = useState(""); // Set a default value
-
-  const [documentCount, setDocumentCount] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     // Check if the current location is /dashboard and set the Overview button state accordingly
@@ -39,17 +39,6 @@ const Dashboard = () => {
     setPricingClicked(location.pathname === "/pricing");
     setSettingClicked(location.pathname === "/profilesettings")
     setContactUsClicked(location.pathname === "/contactus");
-
-    const userno = localStorage.getItem('userno');
-
-    axios.get(`http://localhost:8080/api/document/files/${userno}`)
-        .then(response => {
-            setUserData(response.data);
-            setDocumentCount(response.data.length);
-        })
-        .catch(error => {
-            console.error('Error retrieving documents!', error);
-        });
     
     // Extract entered username from location state
     const newEnteredUsername = location.state?.enteredUsername || "";
@@ -70,51 +59,7 @@ const Dashboard = () => {
     .catch(error => {
       console.error('There was an error retrieving the user data!', error);
     });
-
-    const fetchProfilePicture = () => {
-      fetch(`http://localhost:8080/api/profile/getProfilePicture/${userno}`)
-          .then((response) => response.blob())
-          .then((blob) => {
-              // Set the selected image for display
-              setSelectedImage(URL.createObjectURL(blob));
-          })
-          .catch((error) => console.error("Error:", error));
-    };
-
-    fetchProfilePicture();
-
   }, [location.pathname, location.state?.enteredUsername]);
-
-  const convertToCSV = (data) => {
-
-    if (!data || data.length === 0) {
-      return '';
-    }
-
-    const csvRows = [];
-    const headers = Object.keys(data[0]);
-    csvRows.push(headers.join(','));
-  
-    for (const row of data) {
-      const values = headers.map(header => {
-        const escaped = (''+row[header]).replace(/"/g, '\\"');
-        return `"${escaped}"`;
-      });
-      csvRows.push(values.join(','));
-    }
-  
-    return csvRows.join('\n');
-  };
-  
-  const csvData = convertToCSV(userData);
-
-  const downloadLink = document.createElement('a');
-  downloadLink.href = `data:text/csv;charset=utf-8,${encodeURI(csvData)}`;
-  downloadLink.download = 'userData.csv';
-
-  const handleDownload = () => {
-    downloadLink.click();
-  };
 
   const handleButtonClick = (button) => {
     switch (button) {
@@ -187,21 +132,68 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard">
-      <div className="navcontainer">
-        <div className="dashboardlogo">
-          <Toolbar>
-            <img
-              src="logo.png"
-              alt="AcadZen Logo"
-              style={{ width: '80px' }}
-            />
-            <Typography style={{ fontWeight: 'bold', color: '#8C7111', fontSize: '40px' }}>AcadZen</Typography>
-          </Toolbar>
-        </div>
-        <Toolbar>
-        <Box display="flex" flexDirection="column" alignItems="center"justifyContent="flex-start" style={{ height: '50vh', marginTop:'50px' }}>
-        <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+    <div className="welcome-back-page">
+    <div style={{backgroundColor: '#F5D56E', minHeight: '100vh', position: 'relative'}}>
+        <Box style={{ background: 'white', borderRadius: '10px', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '10px', position: 'absolute', top: '35px', right: '100px'}}>
+              <Box style={{ background: '#FAC712', borderRadius: '10px', width: '50px', height: '50px' }}>
+                    <Link to="/dashboard" style={{ textDecoration: 'none' }}> 
+                          <IconButton color="black" style={{ fontSize: '45px' }}>
+                              <HomeIcon style={{ fontSize: '80%', width: '100%' }} />
+                            </IconButton>
+                    </Link>
+
+              </Box>
+        </Box>
+             <Box style={{ width: '430px', height: '70px', position: 'absolute', top: '15%', left: '55%', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transform: 'translate(-50%, -50%)', 
+                  backgroundColor: 'white'}} > 
+                    <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '45px', marginRight: '12px'}}>AcadZen</Typography> 
+                    <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#332D2D', fontSize: '45px'}}>Plus</Typography>
+              </Box>
+              <div style={{width: '430px', height: '70px', position: 'absolute', top: '25%', left: '55%', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transform: 'translate(-50%, -50%)'}} > 
+              <Typography style={{ fontFamily: 'Inter', fontWeight: 'bold', color: '#332D2D', fontSize: '25px', textAlign: 'center'}}>Excel in your courses using our latest set of study resources.
+</Typography>
+<Box style={{backgroundColor: '#FAC712', padding: '10px', borderRadius: '15px', position: 'absolute', top: '120px', right: '500px', zIndex: '5',
+            fontFamily: 'Inter', fontWeight: 'bold', width: '95px'}}>
+      BEST DEAL!</Box>
+<Box style={{ width: '400px', height: '300px', backgroundColor: '#FFFFFF', margin: '20px auto', borderRadius: '20px', border: '1.5px solid black',
+              boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', position: 'absolute', top: '300px', left: '10px', transform: 'translate(-50%, -50%)',
+              display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '0px 30px 60px 30px'}}> 
+              <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '40px', textAlign: 'left', marginBottom: '25px', marginTop: '20px'}}>Annual </Typography>
+              <Typography style={{ fontFamily: 'Inter', color: '#9FA0A0', fontSize: '22px', textAlign: 'left'}}>Free 7-day trial then</Typography>
+              <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '32px', textAlign: 'left'}}>₱300.00</Typography>
+              <Typography style={{ fontFamily: 'Inter', color: '#9FA0A0', fontSize: '15px', textAlign: 'left'}}>Which is ₱25.00/ month</Typography>
+              <Button style={{background: '#FAC712', fontFamily: 'Inter', fontSize: '20px', fontWeight: 'bold', color: '#555245', marginTop: '70px',marginLeft: '15px',
+                              textTransform: 'none', padding: '10px', borderRadius: '10px', width: '370px'}}>
+                Start your free trial now</Button> 
+              </Box>
+<Box style={{ width: '400px', height: '300px', backgroundColor: '#FFFFFF', margin: '20px auto',borderRadius: '20px', border: '1.5px solid black',
+              boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)', position: 'absolute', top: '300px', left: '500px', transform: 'translate(-50%, -50%)',
+              display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '30px'}}> 
+              <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '40px', textAlign: 'left', marginBottom: '25px'}}>Monthly </Typography>
+              <Typography style={{ fontFamily: 'Inter', color: '#9FA0A0', fontSize: '22px', textAlign: 'left'}}>Amount billed today</Typography>
+              <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+              <Typography style={{ fontFamily: 'Inter', fontWeight: 'bolder', color: '#B18A00', fontSize: '32px', textAlign: 'left', marginRight: '10px'}}>₱30.00</Typography>
+              <Typography style={{ fontFamily: 'Inter', color: '#9FA0A0', fontSize: '15px', textAlign: 'left'}}> / month</Typography>
+              </div>
+              <Button style={{background: '#332D2D', fontFamily: 'Inter', fontSize: '20px', fontWeight: 'bold', color: '#FAC712', marginTop: '70px',marginLeft: '15px',
+                              textTransform: 'none', padding: '10px', borderRadius: '10px', width: '370px'}}>
+                Start your free trial now</Button> 
+              </Box>
+              </div>
+        <div className="sideBar" >
+              <Toolbar style={{marginTop: '25px'}}>
+              <img
+                    src="logo.png"
+                    alt="AcadZen Logo"
+                    style={{ width: '80px' }}
+                  />
+                  <Typography style={{ fontWeight: 'bold', color: '#8C7111', fontSize: '40px' }}>AcadZen</Typography>
+            </Toolbar>
+            <Toolbar>
+            <Box display="flex" flexDirection="column" alignItems="center"justifyContent="flex-start" style={{ height: '50vh', marginTop:'50px' }}>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
                     <Button
                       type="submit"
                       variant={overviewClicked ? "contained" : "outlined"}
@@ -340,98 +332,11 @@ const Dashboard = () => {
           style={{ fontSize:'15px', width: '250px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px' }}
         > Contact us</Button>
       </div>
-      </div>
-      <div className="namecontainer">
-        <Toolbar style={{ margin: '10px' }}>
-          <Link to='/profilesettings'>
-          <Button
-            variant="contained"
-            color="primary"
-            // onClick={handleImageButtonClick}
-            style={{
-              borderRadius: '50%', // Make the button circular
-              width: '75px',
-              height: '68px',
-              padding: 0,
-              // marginTop:'20px',
-              backgroundColor: 'white'
-            }}
-          >
-            {selectedImage ? (
-              <img
-                src={selectedImage}
-                alt="User Avatar"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
-              />
-            ) : (
-              // <Logout />
-              <></>
-            )}
-          </Button>
-          </Link>
-          <div style={{ marginLeft: '20px' }}>
-            <Typography variant="h6" style={{ fontWeight: 'bold', fontFamily: 'Montserrat' }}>
-              Welcome Back,
-            </Typography>
-            <Typography variant="h3" style={{ fontWeight: 'bold', fontFamily: 'Montserrat' }}>
-              {userName}
-            </Typography>
-            
-          </div>
-        </Toolbar>
-        <div className="quizact">
-          <h3>Recent Quiz Activity</h3>
-          <div className="insidequizdiv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}></div>
-          {/* <div className="dluserinfodiv">
-            <Button 
-              color="inherit"
-              type="submit"
-              variant="contained"
-              style={{ fontSize:'12px', width: '200px', borderRadius: '10px', backgroundColor: '#FAC712', color: 'black', fontWeight: 'bold', height:'40px', marginTop:'5px' }}
-              onClick={handleDownload}>Download User Data
-            </Button></div> */}
         </div>
-          <div className="recentdiv" style={{ display: 'flex', flexDirection: 'space-between'}}>
-          <h3>Recent Flashcards</h3>
-          </div>
-          <div className="uploadstatus" style={{ display: 'flex', flexDirection: 'space-between'}}>
-            <h3>Upload Status</h3>
-            <div className="uploadstatus1" style={{ display: 'flex', flexDirection: 'column', alignItems:'center'}}>
-              <Typography variant="h8" style={{fontWeight:'bold'}}>
-              {documentCount}
-              </Typography>
-              <Typography variant="h8" style={{fontWeight:'bold'}}>
-              Documents Uploaded
-              </Typography>
-            </div>
-            <div className="uploadstatus2" style={{ display: 'flex', flexDirection: 'space-between', alignItems:'start'}}>
-              <h4>Documents in Queue</h4>
-            </div>
-            <div className="uploadstatus3" style={{ display: 'flex', flexDirection: 'space-between', alignItems:'start'}}>
-              <h4>Documents Converted</h4>
-            </div>
-            <div className="uploadstatus4" style={{ display: 'flex', flexDirection: 'space-between', alignItems:'start'}}>
-              <h4>Conversion Errors</h4>
-            </div>
-          </div>
-          
-          <div className="currentstreakdiv" style={{ display: 'flex', flexDirection: 'space-between', alignItems: 'center' }}></div>
-          <div className="mottocontainer">
-              <img src="/quote.png" alt="Quote for to day" style={{ width: '100%', marginTop: '55px' }} />
-          </div>
-          <div className="dreamboardnote">
-              <h3 style={{margin: '30px 0px 30px 0px', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: '22px'}}>DREAMBOARD</h3>
-              <div style={{display: 'flex', alignItems: 'center'}}>
-                <div className="smallest">Box3</div>
-                <div className="smaller"></div>
-                <div className="box">Class of 2025 Graduate</div>
-                <div className="smaller">Box2</div>
-                <div className="smallest">Box3</div>
-              </div>
-          </div>
-      </div>
+
+    </div>
     </div>
   );
-};
+}
 
-export default Dashboard;
+export default Pricing;
